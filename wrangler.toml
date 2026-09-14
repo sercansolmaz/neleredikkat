@@ -1,0 +1,21 @@
+name = "neleredikkat"
+main = "worker/index.js"
+compatibility_date = "2026-09-01"
+account_id = "1960d5e4651acc4079574e18e05610fa"
+
+routes = [
+  { pattern = "neleredikkat.com", custom_domain = true },
+  { pattern = "www.neleredikkat.com", custom_domain = true }
+]
+
+# Statik site assetleri (npm run build -> out/)
+[assets]
+directory = "./out"
+binding = "ASSETS"
+not_found_handling = "404-page"   # out/404.html
+run_worker_first = true           # www->apex redirect worker'da; her istek once worker'dan gecer
+
+# /api/log-search için KV
+[[kv_namespaces]]
+binding = "ND_LOGS"
+id = "e40afb049e07458eb17d07c85e57def7"

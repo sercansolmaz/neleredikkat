@@ -1,0 +1,30 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { recordSearchLog, getMissingSearchSummaries } from '@/lib/logs';
+
+export async function POST(req: NextRequest) {
+  try {
+    const body = await req.json();
+    const { query, resultFound, resultCount } = body;
+
+    if (!query || typeof query !== 'string') {
+      return NextResponse.json({ error: 'Query is required' }, { status: 400 });
+    }
+
+    const entry = recordSearchLog(query, Boolean(resultFound), Number(resultCount) || 0);
+
+    return NextResponse.json({ success: true, entry });
+  } catch (err) {
+    console.error('API log-search error:', err);
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+  }
+}
+
+export async function GET() {
+  try {
+    const summaries = getMissingSearchSummaries();
+    return NextResponse.json({ summaries });
+  } catch (err) {
+    console.error('API log-search GET error:', err);
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+  }
+}

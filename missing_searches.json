@@ -1,0 +1,62 @@
+[
+  {
+    "query": "ikinci el araba alırken",
+    "timestamp": "2026-09-14T22:04:46.644Z",
+    "resultFound": true,
+    "resultCount": 2
+  },
+  {
+    "query": "ikinci el araba alırken",
+    "timestamp": "2026-09-14T22:04:46.650Z",
+    "resultFound": true,
+    "resultCount": 2
+  },
+  {
+    "query": "laptop alırken",
+    "timestamp": "2026-09-14T22:07:56.784Z",
+    "resultFound": true,
+    "resultCount": 11
+  },
+  {
+    "query": "laptop alırken",
+    "timestamp": "2026-09-14T22:07:56.791Z",
+    "resultFound": true,
+    "resultCount": 11
+  },
+  {
+    "query": "ev kiralarken",
+    "timestamp": "2026-09-14T22:08:01.934Z",
+    "resultFound": true,
+    "resultCount": 1
+  },
+  {
+    "query": "ev kiralarken",
+    "timestamp": "2026-09-14T22:08:01.939Z",
+    "resultFound": true,
+    "resultCount": 1
+  },
+  {
+    "query": "laptop alırken",
+    "timestamp": "2026-09-14T22:08:49.379Z",
+    "resultFound": true,
+    "resultCount": 11
+  },
+  {
+    "query": "laptop alırken",
+    "timestamp": "2026-09-14T22:08:49.385Z",
+    "resultFound": true,
+    "resultCount": 11
+  },
+  {
+    "query": "bebek arabası alırken",
+    "timestamp": "2026-09-14T22:12:08.989Z",
+    "resultFound": true,
+    "resultCount": 4
+  },
+  {
+    "query": "bebek arabası alırken",
+    "timestamp": "2026-09-14T22:12:08.996Z",
+    "resultFound": true,
+    "resultCount": 4
+  }
+]
