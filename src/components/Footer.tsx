@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { ShieldCheck, Info } from 'lucide-react';
+import { ShieldCheck, Info, Mail } from 'lucide-react';
 import { CATEGORIES } from '@/data/categories';
 
 export default function Footer() {
@@ -65,15 +65,24 @@ export default function Footer() {
           {/* Product Principle Disclaimer */}
           <div>
             <h3 className="text-xs font-semibold text-slate-200 uppercase tracking-wider mb-4">
-              Ürün Prensibi
+              İletişim
             </h3>
-            <div className="bg-slate-800/80 p-3.5 rounded-xl border border-slate-700/60 space-y-2">
-              <div className="flex items-center gap-1.5 text-slate-200 text-xs font-semibold">
-                <Info className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                <span>NelerDikkat vs. EkipmanTavsiyesi</span>
-              </div>
-              <p className="text-[11px] text-slate-400 leading-relaxed">
-                NelerDikkat.com marka ve model tavsiyesi üretmez; karar vermeden önce sorulması gereken doğru soruları ve dikkat edilecek teknik kriterleri öğretir.
+            <div className="space-y-2.5">
+              <p className="text-xs leading-relaxed">
+                Öneri, şikayet, soru veya sponsorluk için bize ulaşın.
+              </p>
+              <Link
+                href="/iletisim"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-colors"
+              >
+                <Mail className="w-3.5 h-3.5" />
+                İletişim Formu
+              </Link>
+              <p className="text-[11px] text-slate-500">
+                ya da{' '}
+                <a href="mailto:info@neleredikkat.com" className="text-emerald-400 hover:underline">
+                  info@neleredikkat.com
+                </a>
               </p>
             </div>
           </div>
