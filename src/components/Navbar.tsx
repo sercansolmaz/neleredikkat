@@ -1,13 +1,27 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Search, Compass, Layers, Menu, X, ShieldCheck } from 'lucide-react';
 import { CATEGORIES } from '@/data/categories';
+import QuickSearchOverlay from '@/components/QuickSearchOverlay';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [catDropdownOpen, setCatDropdownOpen] = useState(false);
+  const [quickSearchOpen, setQuickSearchOpen] = useState(false);
+
+  // ⌘K / Ctrl+K ile aç/kapat
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setQuickSearchOpen(o => !o);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors">
@@ -66,24 +80,28 @@ export default function Navbar() {
               <span>Karar Yolculukları</span>
             </Link>
 
-            <Link
-              href="/arama"
+            <button
+              onClick={() => setQuickSearchOpen(true)}
               className="flex items-center gap-2 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 px-3.5 py-1.5 rounded-lg text-xs font-medium border border-slate-200 dark:border-slate-700 transition-all"
+              aria-label="Hızlı Arama"
             >
               <Search className="w-3.5 h-3.5 text-slate-400" />
               <span>Hızlı Arama...</span>
-            </Link>
+              <kbd className="hidden lg:inline-flex items-center gap-0.5 text-[10px] font-semibold text-slate-400 dark:text-slate-500 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded px-1.5 py-0.5">
+                ⌘K
+              </kbd>
+            </button>
           </nav>
 
           {/* Mobile Search & Hamburger */}
           <div className="flex md:hidden items-center gap-2">
-            <Link
-              href="/arama"
+            <button
+              onClick={() => setQuickSearchOpen(true)}
               className="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
               aria-label="Arama Yap"
             >
               <Search className="w-5 h-5 text-emerald-600" />
-            </Link>
+            </button>
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -100,14 +118,13 @@ export default function Navbar() {
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 pt-2 pb-6 space-y-3">
-          <Link
-            href="/arama"
-            onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center gap-3 p-3 bg-slate-100 dark:bg-slate-800 rounded-xl text-slate-800 dark:text-slate-200 font-medium"
+          <button
+            onClick={() => { setMobileMenuOpen(false); setQuickSearchOpen(true); }}
+            className="w-full flex items-center gap-3 p-3 bg-slate-100 dark:bg-slate-800 rounded-xl text-slate-800 dark:text-slate-200 font-medium"
           >
             <Search className="w-5 h-5 text-emerald-600" />
             <span>Neye dikkat etmelisin? Arama Yap</span>
-          </Link>
+          </button>
 
           <Link
             href="/yolculuklar"
@@ -137,6 +154,9 @@ export default function Navbar() {
           </div>
         </div>
       )}
+
+      {/* Hızlı Arama Overlay */}
+      <QuickSearchOverlay open={quickSearchOpen} onClose={() => setQuickSearchOpen(false)} />
     </header>
   );
 }
