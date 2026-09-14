@@ -6,6 +6,7 @@ import { getCategoryBySlug, CATEGORIES } from '@/data/categories';
 import { getGuidesByCategory } from '@/data/guides';
 import GuideCard from '@/components/GuideCard';
 import SearchBar from '@/components/SearchBar';
+import SponsorSlot from '@/components/SponsorSlot';
 import { ChevronRight, Layers } from 'lucide-react';
 
 interface CategoryPageProps {
@@ -55,6 +56,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           {category.name}
         </span>
       </nav>
+
+      {/* Sponsor / Reklam Alanı */}
+      <SponsorSlot categorySlug={category.slug} categoryName={category.name} />
 
       {/* Category Header */}
       <div className="bg-white dark:bg-slate-800 rounded-3xl border border-slate-200/80 dark:border-slate-700/80 p-6 sm:p-10 space-y-6">
