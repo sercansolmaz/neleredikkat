@@ -99,9 +99,6 @@ export default function Footer() {
         <div className="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
           <p>© {new Date().getFullYear()} NelerDikkat.com. Tüm hakları saklıdır.</p>
           <div className="flex items-center gap-6">
-            <Link href="/admin/missing-searches" className="hover:text-slate-400 transition-colors">
-              Talep Edilen Rehberler (Admin)
-            </Link>
             <Link href="/sitemap.xml" className="hover:text-slate-400 transition-colors">
               Sitemap
             </Link>
