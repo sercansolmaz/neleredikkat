@@ -28,6 +28,12 @@ export default function Footer() {
                 Sıfır AI Yanılması & %100 Doğrulanmış Kriterler
               </span>
             </div>
+            <div className="flex items-start gap-2 bg-slate-800/80 p-3 rounded-xl border border-slate-700/60">
+              <Info className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+              <p className="text-[11px] text-slate-400 leading-relaxed">
+                NelerDikkat.com marka ve model tavsiyesi üretmez; karar vermeden önce sorulması gereken doğru soruları ve dikkat edilecek teknik kriterleri öğretir.
+              </p>
+            </div>
           </div>
 
           {/* Categories Column 1 */}
