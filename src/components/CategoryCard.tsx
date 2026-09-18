@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Category } from '@/types/guide';
+import { getGuidesByCategory } from '@/data/guides';
 import {
   Laptop,
   Home,
@@ -36,6 +37,7 @@ interface CategoryCardProps {
 
 export default function CategoryCard({ category }: CategoryCardProps) {
   const IconComponent = ICON_MAP[category.iconName] || Laptop;
+  const guideCount = getGuidesByCategory(category.slug).length;
 
   return (
     <Link
@@ -58,7 +60,7 @@ export default function CategoryCard({ category }: CategoryCardProps) {
       </div>
 
       <div className="pt-4 mt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between text-xs text-slate-500">
-        <span className="font-medium text-slate-400">{category.popularTopics.length} Popüler Konu</span>
+        <span className="font-medium text-slate-400">{guideCount} Rehber</span>
         <ChevronRight className="w-4 h-4 text-emerald-600 group-hover:translate-x-1 transition-transform" />
       </div>
     </Link>

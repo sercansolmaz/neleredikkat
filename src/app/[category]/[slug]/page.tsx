@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { getGuideBySlug, GUIDES, getGuideById } from '@/data/guides';
 import { getCategoryBySlug } from '@/data/categories';
 import { getJourneyBySlug } from '@/data/journeys';
+import { getNeedChain } from '@/data/needChains';
 import InteractiveChecklist from '@/components/InteractiveChecklist';
 import RedFlags from '@/components/RedFlags';
 import SellerQuestions from '@/components/SellerQuestions';
@@ -61,10 +62,19 @@ export default async function GuidePage({ params }: GuidePageProps) {
 
   const category = getCategoryBySlug(guide.categorySlug);
 
-  // Fetch related guides
-  const relatedGuides = guide.relatedGuideIds
-    .map(id => getGuideById(id))
-    .filter((g): g is NonNullable<typeof g> => g !== undefined);
+  // İhtiyaç zinciri: önce → birlikte → ikinci el → sonraki adım
+  const needChain = getNeedChain(guide, GUIDES);
+  const chainGroups = [
+    { key: 'before', label: 'Öncesinde Seçilir', ids: needChain.before },
+    { key: 'together', label: 'Birlikte Gerekebilir', ids: needChain.together },
+    { key: 'secondHand', label: 'İkinci El Seçeneği', ids: needChain.secondHand },
+    { key: 'next', label: 'Sonraki Adım', ids: needChain.next }
+  ]
+    .map(group => ({
+      ...group,
+      guides: group.ids.map(id => getGuideById(id)).filter((g): g is NonNullable<typeof g> => g !== undefined)
+    }))
+    .filter(group => group.guides.length > 0);
 
   // Fetch related decision journey if any
   const journey = guide.journeyIds && guide.journeyIds.length > 0
@@ -264,23 +274,34 @@ export default async function GuidePage({ params }: GuidePageProps) {
         </section>
       )}
 
-      {/* Bölüm 7: Bunlara da bak (İlgili Rehberler) */}
-      {relatedGuides.length > 0 && (
-        <section className="space-y-6 pt-6 border-t border-slate-200 dark:border-slate-800">
+      {/* Bölüm 7: İhtiyaç Zinciri */}
+      {chainGroups.length > 0 && (
+        <section className="space-y-7 pt-6 border-t border-slate-200 dark:border-slate-800">
           <div className="space-y-1">
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-              Bunlara Da Bak
+              İhtiyaç Zinciri
             </h2>
             <p className="text-xs text-slate-500 dark:text-slate-400">
-              Bu karar ile yakından ilişkili diğer rehberler ve kontrol listeleri.
+              Bu karardan önce, beraberinde veya sonrasında değerlendirmen gerekebilecek adımlar.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {relatedGuides.map(rel => (
-              <GuideCard key={rel.id} guide={rel} />
-            ))}
-          </div>
+          {chainGroups.map(group => (
+            <div key={group.key} className="space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="h-px flex-1 bg-slate-200 dark:bg-slate-800" />
+                <h3 className="text-[11px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+                  {group.label}
+                </h3>
+                <span className="h-px flex-1 bg-slate-200 dark:bg-slate-800" />
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                {group.guides.map(rel => (
+                  <GuideCard key={`${group.key}-${rel.id}`} guide={rel} />
+                ))}
+              </div>
+            </div>
+          ))}
         </section>
       )}
 

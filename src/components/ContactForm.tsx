@@ -51,10 +51,10 @@ export default function ContactForm() {
         setStatus('error');
         setErrorMsg(
           data.error === 'rate'
-            ? 'Çok fazla deneme yaptın. Lütfen bir saat sonra tekrar dene.'
+            ? 'Kısa sürede çok fazla deneme yapıldı. Lütfen bir saat sonra tekrar deneyebilirsin.'
             : data.error === 'validation'
-              ? 'Lütfen tüm alanları doğru doldur (mesaj en az 10 karakter).'
-              : 'Mesaj gönderilemedi. Lütfen tekrar dene ya da doğrudan e-posta gönder.'
+              ? 'Bazı alanlar eksik ya da hatalı görünüyor. Mesajın en az 10 karakter olmalı.'
+              : 'Mesajın gönderilemedi. Lütfen tekrar dene; olmazsa doğrudan e-posta gönderebilirsin.'
         );
       }
     } catch {
@@ -69,9 +69,9 @@ export default function ContactForm() {
         <div className="w-14 h-14 rounded-2xl bg-emerald-600 text-white flex items-center justify-center mx-auto shadow-lg shadow-emerald-600/30">
           <CheckCircle2 className="w-7 h-7" />
         </div>
-        <h2 className="text-xl font-black text-slate-900 dark:text-white">Mesajın iletildi, teşekkürler!</h2>
+        <h2 className="text-xl font-black text-slate-900 dark:text-white">Mesajın bize ulaştı — teşekkür ederiz!</h2>
         <p className="text-sm text-slate-600 dark:text-slate-300">
-          Değerlendirmemiz ve dönüşümüz e-posta üzerinden olacak.
+          Mesajın ekibimiz tarafından özenle incelenecek; gerektiğinde e-posta yoluyla sana dönüş yapacağız.
         </p>
         <button
           onClick={() => setStatus('idle')}

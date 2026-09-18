@@ -65,20 +65,20 @@ export default function ContactPage() {
       <section className="bg-white dark:bg-slate-800/80 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 p-6 sm:p-8 space-y-5">
         <h2 className="flex items-center gap-2 text-base font-bold text-slate-900 dark:text-white">
           <Clock className="w-4 h-4 text-emerald-600" />
-          Hangi konu ne kadar sürer?
+          Mesajını aldıktan sonra ne yapıyoruz?
         </h2>
         <ul className="space-y-3 text-sm text-slate-600 dark:text-slate-300">
           <li className="flex gap-2.5">
             <ShieldCheck className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
-            <span><strong className="text-slate-800 dark:text-slate-200">Rehber talebi:</strong> en çok aranan konular öncelikli olarak yayınlanır; talebin sıraya eklenir.</span>
+            <span><strong className="text-slate-800 dark:text-slate-200">Rehber talebi:</strong> talebin yayın planımıza eklenir; en çok aranan konulardan başlayarak hazırlamaya çalışırız. İlgini paylaştığın için teşekkür ederiz.</span>
           </li>
           <li className="flex gap-2.5">
             <ShieldCheck className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
-            <span><strong className="text-slate-800 dark:text-slate-200">Şikayet / düzeltme:</strong> ilgili içerik incelenir, gerekirse düzeltilir ve yanıtlanır.</span>
+            <span><strong className="text-slate-800 dark:text-slate-200">Şikayet / düzeltme:</strong> ilgili içerik özenle incelenir, gerekirse düzeltilir ve sonucu e-posta yoluyla paylaşılır.</span>
           </li>
           <li className="flex gap-2.5">
             <Megaphone className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
-            <span><strong className="text-slate-800 dark:text-slate-200">Sponsorluk / iş birliği:</strong> teklifinin kapsamını, hedef kitleni ve takvimi yaz; uygun görürsek dönüş yaparız.</span>
+            <span><strong className="text-slate-800 dark:text-slate-200">Sponsorluk / iş birliği:</strong> teklifin dikkatle değerlendirilir. Kapsam, hedef kitle ve takvim gibi detayları paylaşman değerlendirmeyi hızlandırır; sonucu en kısa sürede e-postayla bildiririz.</span>
           </li>
         </ul>
         <p className="text-xs text-slate-400 dark:text-slate-500 border-t border-slate-100 dark:border-slate-700/60 pt-4">

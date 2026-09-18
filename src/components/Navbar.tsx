@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Search, Compass, Layers, Menu, X, ShieldCheck } from 'lucide-react';
 import { CATEGORIES } from '@/data/categories';
+import { getGuidesByCategory } from '@/data/guides';
 import QuickSearchOverlay from '@/components/QuickSearchOverlay';
 
 export default function Navbar() {
@@ -65,7 +66,7 @@ export default function Navbar() {
                       className="flex items-center justify-between px-3 py-2 rounded-lg text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                     >
                       <span>{cat.name}</span>
-                      <span className="text-xs text-slate-400 font-normal">{cat.popularTopics.length} konu</span>
+                      <span className="text-xs text-slate-400 font-normal">{getGuidesByCategory(cat.slug).length} rehber</span>
                     </Link>
                   ))}
                 </div>
