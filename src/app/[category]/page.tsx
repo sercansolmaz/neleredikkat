@@ -29,7 +29,8 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
 
   return {
     title: `${cat.name} Rehberleri - Nelere Dikkat Edilmeli?`,
-    description: `${cat.name} kategorisinde bir seçim yapmadan önce kontrol etmeniz gereken kriterler, kırmızı bayraklar ve kontrol listeleri.`
+    description: `${cat.name} kategorisinde bir seçim yapmadan önce kontrol etmeniz gereken kriterler, kırmızı bayraklar ve kontrol listeleri.`,
+    alternates: { canonical: `/${categorySlug}/` }
   };
 }
 

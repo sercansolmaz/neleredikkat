@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import React from 'react';
 import Link from 'next/link';
 import SearchBar from '@/components/SearchBar';
@@ -8,6 +9,10 @@ import { getPopularGuides, getLatestGuides } from '@/data/guides';
 import { CATEGORIES } from '@/data/categories';
 import { DECISION_JOURNEYS } from '@/data/journeys';
 import { ShieldCheck, Compass, Sparkles, Layers, ArrowRight } from 'lucide-react';
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' }
+};
 
 export default function HomePage() {
   const popularGuides = getPopularGuides(6);

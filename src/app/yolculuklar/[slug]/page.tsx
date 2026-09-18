@@ -26,7 +26,8 @@ export async function generateMetadata({ params }: JourneyPageProps): Promise<Me
 
   return {
     title: `${journey.title} - Karar Yolculuğu`,
-    description: journey.description
+    description: journey.description,
+    alternates: { canonical: `/yolculuklar/${slug}/` }
   };
 }
 

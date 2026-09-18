@@ -7,7 +7,8 @@ import { Compass, ChevronRight } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Karar Yolculukları - Adım Adım Rehber Rotaları',
-  description: 'İlk motosikletinizi alırken, ev ofisinizi kurarken veya bebeğiniz doğarken yapmanız gereken tüm seçimleri adım adım tamamlayın.'
+  description: 'İlk motosikletinizi alırken, ev ofisinizi kurarken veya bebeğiniz doğarken yapmanız gereken tüm seçimleri adım adım tamamlayın.',
+  alternates: { canonical: '/yolculuklar/' }
 };
 
 export default function JourneysIndexPage() {
