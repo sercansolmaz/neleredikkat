@@ -17,19 +17,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0
     },
     {
-      url: `${baseUrl}/yolculuklar`,
+      url: `${baseUrl}/yolculuklar/`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8
     },
     {
-      url: `${baseUrl}/arama`,
+      url: `${baseUrl}/arama/`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.5
     },
     {
-      url: `${baseUrl}/iletisim`,
+      url: `${baseUrl}/iletisim/`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.5
@@ -39,7 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Categories routes
   CATEGORIES.forEach(cat => {
     routes.push({
-      url: `${baseUrl}/${cat.slug}`,
+      url: `${baseUrl}/${cat.slug}/`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.9
@@ -49,7 +49,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Guides routes
   GUIDES.forEach(guide => {
     routes.push({
-      url: `${baseUrl}/${guide.categorySlug}/${guide.slug}`,
+      url: `${baseUrl}/${guide.categorySlug}/${guide.slug}/`,
       lastModified: new Date(guide.lastUpdated),
       changeFrequency: 'monthly',
       priority: 0.9
@@ -59,7 +59,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Decision Journeys routes
   DECISION_JOURNEYS.forEach(journey => {
     routes.push({
-      url: `${baseUrl}/yolculuklar/${journey.slug}`,
+      url: `${baseUrl}/yolculuklar/${journey.slug}/`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8
