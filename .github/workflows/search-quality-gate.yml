@@ -1,16 +1,17 @@
 name: Search Quality Gate (report-only)
-# PHASE 1: report-only. PHASE 2 (enforcement) icin son satirdaki exit'i ac.
+# PHASE 1: report-only (blockers don't fail CI). PHASE 2: add --baseline + --mode enforce.
+# Fail-closed: missing SQG_SITEMAP, sitemap fetch/parse/empty errors FAIL the run (exit 2).
 on:
   pull_request:
     branches: [main]
   workflow_dispatch:
     inputs:
       sitemap:
-        description: "Sitemap URL (default: site)"
+        description: "Sitemap URL (default: SQG_SITEMAP repo variable)"
         required: false
         default: ""
       sample:
-        description: "Sample size per run (0 = all)"
+        description: "Sample size (0 = all URLs)"
         required: false
         default: "60"
 
@@ -21,25 +22,30 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
-      - name: Run Search Quality Gate (report-only)
+      - name: Run Search Quality Gate (report-only, fail-closed on infra errors)
         run: |
-          cp scripts/sqg.py sqg.py
-          python3 sqg.py audit --sitemap "${{ inputs.sitemap || env.SITEMAP }}" ${{ (inputs.sample || '60') == '0' && '--all' || '' }} --out sqg-report.json || true
-        env:
-          SITEMAP: ${{ vars.SQG_SITEMAP }}
-      - name: Fail on blockers (PHASE 2 enforcement)
+          SITEMAP="${{ inputs.sitemap || vars.SQG_SITEMAP }}"
+          if [ -z "$SITEMAP" ]; then
+            echo "::error::SQG_SITEMAP repository variable is not configured (repo Settings > Secrets and variables > Actions > Variables)"
+            exit 2
+          fi
+          echo "Sitemap: $SITEMAP"
+          SAMPLE="${{ inputs.sample || '60' }}"
+          if [ "$SAMPLE" = "0" ]; then python3 scripts/sqg.py audit --sitemap "$SITEMAP" --all --out sqg-report.json
+          else python3 scripts/sqg.py audit --sitemap "$SITEMAP" --sample "$SAMPLE" --out sqg-report.json; fi
+      - name: Summarize blockers (report-only)
         run: |
           python3 - <<'EOF'
           import json,sys
           try: r=json.load(open('sqg-report.json'))
-          except Exception: sys.exit(1)
+          except Exception as e: print(f"::error::no report generated: {e}"); sys.exit(2)
           bl=[x for x in r if any(s=='BLOCKER' for s,_ in x['issues'])]
-          print(f"BLOCKERS: {len(bl)}")
+          print(f"BLOCKERS: {len(bl)} (report-only, Phase 1 — existing tech debt does not fail CI)")
           for x in bl[:20]:
               for s,m in x['issues']:
                   if s=='BLOCKER': print(f"  {x['url']} :: {m}")
-          # PHASE 1: report-only, exit 0. PHASE 2: asagidaki satiri ac:
-          # sys.exit(1 if bl else 0)
+          # PHASE 2: create docs/search/sqg-baseline.json via `scripts/sqg.py baseline`, then run with
+          #   --baseline docs/search/sqg-baseline.json --mode enforce  (new blockers -> exit 1)
           sys.exit(0)
           EOF
       - uses: actions/upload-artifact@v4
