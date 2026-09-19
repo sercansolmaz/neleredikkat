@@ -23,7 +23,7 @@ jobs:
         with: { python-version: "3.12" }
       - name: Run Search Quality Gate (report-only)
         run: |
-          curl -fsSL -o sqg.py https://raw.githubusercontent.com/sercansolmaz/search-quality-gate/main/sqg.py
+          cp scripts/sqg.py sqg.py
           python3 sqg.py audit --sitemap "${{ inputs.sitemap || env.SITEMAP }}" ${{ (inputs.sample || '60') == '0' && '--all' || '' }} --out sqg-report.json || true
         env:
           SITEMAP: ${{ vars.SQG_SITEMAP }}
