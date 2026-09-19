@@ -1,0 +1,47 @@
+name: Search Quality Gate (report-only)
+# PHASE 1: report-only. PHASE 2 (enforcement) icin son satirdaki exit'i ac.
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      sitemap:
+        description: "Sitemap URL (default: site)"
+        required: false
+        default: ""
+      sample:
+        description: "Sample size per run (0 = all)"
+        required: false
+        default: "60"
+
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Run Search Quality Gate (report-only)
+        run: |
+          curl -fsSL -o sqg.py https://raw.githubusercontent.com/sercansolmaz/search-quality-gate/main/sqg.py
+          python3 sqg.py audit --sitemap "${{ inputs.sitemap || env.SITEMAP }}" ${{ (inputs.sample || '60') == '0' && '--all' || '' }} --out sqg-report.json || true
+        env:
+          SITEMAP: ${{ vars.SQG_SITEMAP }}
+      - name: Fail on blockers (PHASE 2 enforcement)
+        run: |
+          python3 - <<'EOF'
+          import json,sys
+          try: r=json.load(open('sqg-report.json'))
+          except Exception: sys.exit(1)
+          bl=[x for x in r if any(s=='BLOCKER' for s,_ in x['issues'])]
+          print(f"BLOCKERS: {len(bl)}")
+          for x in bl[:20]:
+              for s,m in x['issues']:
+                  if s=='BLOCKER': print(f"  {x['url']} :: {m}")
+          # PHASE 1: report-only, exit 0. PHASE 2: asagidaki satiri ac:
+          # sys.exit(1 if bl else 0)
+          sys.exit(0)
+          EOF
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: sqg-report, path: sqg-report.json }
