@@ -22,12 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.8
     },
-    {
-      url: `${baseUrl}/arama/`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.5
-    },
+    // /arama/ dahili arama sayfası: noindex,follow — sitemap'e girmez.
     {
       url: `${baseUrl}/iletisim/`,
       lastModified: new Date(),
