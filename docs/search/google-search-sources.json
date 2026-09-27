@@ -1,0 +1,29 @@
+{
+  "verified_on": "2026-09-19",
+  "sources": [
+    {"topic": "Search Essentials", "url": "https://developers.google.com/search/docs/essentials"},
+    {"topic": "Spam policies (scaled content abuse, thin affiliate)", "url": "https://developers.google.com/search/docs/essentials/spam-policies"},
+    {"topic": "Creating helpful, people-first content", "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"},
+    {"topic": "AI-generated content guidance", "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"},
+    {"topic": "Product review guidance", "url": "https://developers.google.com/search/docs/appearance/product-review-guidelines"},
+    {"topic": "Canonical / duplicate URLs", "url": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"},
+    {"topic": "Duplicate content", "url": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"},
+    {"topic": "Build and submit a sitemap (lastmod)", "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap"},
+    {"topic": "Sitemap lastmod usage", "url": "https://developers.google.com/search/blog/2023/06/sitemaps-lastmod-ping"},
+    {"topic": "robots.txt intro (noindex not supported)", "url": "https://developers.google.com/search/docs/crawling-indexing/robots/intro"},
+    {"topic": "Crawlable links, rel=sponsored/nofollow", "url": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable"},
+    {"topic": "Managing multi-site / hreflang", "url": "https://developers.google.com/search/docs/specialty/international/managing-multi-site-sites"},
+    {"topic": "Localized versions / hreflang", "url": "https://developers.google.com/search/docs/specialty/international/localized-versions"},
+    {"topic": "Product structured data", "url": "https://developers.google.com/search/docs/appearance/structured-data/product"},
+    {"topic": "Article structured data", "url": "https://developers.google.com/search/docs/appearance/structured-data/article"},
+    {"topic": "Breadcrumb structured data", "url": "https://developers.google.com/search/docs/appearance/structured-data/breadcrumb"},
+    {"topic": "Intro to structured data", "url": "https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data"},
+    {"topic": "JavaScript SEO basics", "url": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics"},
+    {"topic": "Site divorce / site moves (redirects, HTTP codes)", "url": "https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes"},
+    {"topic": "Faceted navigation", "url": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics"},
+    {"topic": "Page experience / Core Web Vitals", "url": "https://developers.google.com/search/docs/appearance/page-experience"},
+    {"topic": "Search Console (API)", "url": "https://developers.google.com/search/docs/appearance/search-console"},
+    {"topic": "URL Inspection API", "url": "https://developers.google.com/search/blog/2023/06/url-inspection-api"},
+    {"topic": "Indexing API (JobPosting/BroadcastEvent ONLY)", "url": "https://developers.google.com/search/apis/indexing-api"}
+  ]
+}
