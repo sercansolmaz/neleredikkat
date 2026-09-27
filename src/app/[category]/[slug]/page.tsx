@@ -34,6 +34,7 @@ export async function generateMetadata({ params }: GuidePageProps): Promise<Meta
   if (!guide) return {};
 
   const url = `https://neleredikkat.com/${guide.categorySlug}/${guide.slug}`;
+  const ogImage = `/og/${guide.categorySlug}/${guide.slug}.png`;
 
   return {
     title: `${guide.title}`,
@@ -47,7 +48,14 @@ export async function generateMetadata({ params }: GuidePageProps): Promise<Meta
       description: guide.description,
       url,
       type: 'article',
-      publishedTime: guide.lastUpdated
+      publishedTime: guide.lastUpdated,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: guide.title }]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${guide.title}`,
+      description: guide.description,
+      images: [ogImage]
     }
   };
 }
@@ -122,7 +130,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
       name: 'NelerDikkat.com',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://neleredikkat.com/logo.png'
+        url: 'https://neleredikkat.com/og/teknoloji/default.png'
       }
     }
   };
@@ -258,6 +266,8 @@ export default async function GuidePage({ params }: GuidePageProps) {
       <section className="scroll-mt-20" id="checklist">
         <InteractiveChecklist
           guideSlug={guide.slug}
+          guideTitle={guide.title}
+          categorySlug={guide.categorySlug}
           items={guide.checklistItems}
         />
       </section>

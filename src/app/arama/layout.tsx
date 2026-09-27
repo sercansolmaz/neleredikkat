@@ -10,3 +10,9 @@ export const metadata: Metadata = {
   title: "Arama | NelerDikkat",
   robots: { index: false, follow: true },
 };
+
+import { ReactNode } from "react";
+
+export default function AramaLayout({ children }: { children: ReactNode }) {
+  return children;
+}

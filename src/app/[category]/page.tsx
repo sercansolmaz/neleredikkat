@@ -30,7 +30,13 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
   return {
     title: `${cat.name} Rehberleri - Nelere Dikkat Edilmeli?`,
     description: `${cat.name} kategorisinde bir seçim yapmadan önce kontrol etmeniz gereken kriterler, kırmızı bayraklar ve kontrol listeleri.`,
-    alternates: { canonical: `/${categorySlug}/` }
+    alternates: { canonical: `/${categorySlug}/` },
+    openGraph: {
+      title: `${cat.name} Rehberleri - Nelere Dikkat Edilmeli?`,
+      description: `${cat.name} kategorisinde bir seçim yapmadan önce kontrol etmeniz gereken kriterler, kırmızı bayraklar ve kontrol listeleri.`,
+      url: `https://neleredikkat.com/${categorySlug}/`,
+      images: [{ url: `/og/${categorySlug}/_kategori.png`, width: 1200, height: 630, alt: `${cat.name} Rehberleri` }]
+    }
   };
 }
 

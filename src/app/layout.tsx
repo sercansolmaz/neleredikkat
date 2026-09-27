@@ -33,7 +33,8 @@ export const metadata: Metadata = {
     url: 'https://neleredikkat.com',
     siteName: 'NelerDikkat.com',
     title: 'NelerDikkat.com - Karar Vermeden Önce Kontrol Et',
-    description: 'Tüketici kararları için kısa rehberler, uygulanabilir interaktif kontrol listeleri ve kırmızı bayraklar.'
+    description: 'Tüketici kararları için kısa rehberler, uygulanabilir interaktif kontrol listeleri ve kırmızı bayraklar.',
+    images: [{ url: '/og/teknoloji/default.png', width: 1200, height: 630, alt: 'NelerDikkat.com' }]
   }
 };
 
