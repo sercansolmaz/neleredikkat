@@ -110,6 +110,8 @@ export default function InteractiveChecklist({ guideSlug, guideTitle, categorySl
     try {
       const saved = localStorage.getItem(storageKey);
       if (saved) {
+        // Client-only persistence is intentionally hydrated after mount.
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setCheckedIds(JSON.parse(saved));
       }
     } catch (e) {

@@ -1,45 +1,36 @@
 'use client';
 
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useEffect, Suspense, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 import SearchBar from '@/components/SearchBar';
 import GuideCard from '@/components/GuideCard';
-import { searchGuides, SearchResult } from '@/lib/search';
+import { searchDecisionContent, DecisionSearchResult } from '@/lib/search';
 import { getPopularGuides } from '@/data/guides';
+import DecisionSearchCard from '@/components/DecisionSearchCard';
 import { Search, ShieldAlert, Sparkles, Inbox } from 'lucide-react';
 
 function SearchContent() {
   const searchParams = useSearchParams();
   const rawQuery = searchParams.get('q') || '';
-  const [results, setResults] = useState<SearchResult[]>([]);
-  const [hasSearched, setHasSearched] = useState(false);
-  const [logged, setLogged] = useState(false);
+  const query = rawQuery.trim();
+  const results: DecisionSearchResult[] = query ? searchDecisionContent(query) : [];
+  const hasSearched = query.length > 0;
+  const lastLoggedQuery = useRef('');
 
   useEffect(() => {
-    const q = rawQuery.trim();
-    if (q) {
-      const res = searchGuides(q);
-      setResults(res);
-      setHasSearched(true);
+    if (!query || lastLoggedQuery.current === query) return;
 
-      // Log search query anonymously to backend
-      if (!logged) {
-        fetch('/api/log-search', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            query: q,
-            resultFound: res.length > 0,
-            resultCount: res.length
-          })
-        }).catch(err => console.warn('Search logging error:', err));
-        setLogged(true);
-      }
-    } else {
-      setResults([]);
-      setHasSearched(false);
-    }
-  }, [rawQuery, logged]);
+    fetch('/api/log-search', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        query,
+        resultFound: results.length > 0,
+        resultCount: results.length
+      })
+    }).catch(err => console.warn('Search logging error:', err));
+    lastLoggedQuery.current = query;
+  }, [query, results.length]);
 
   const popularGuides = getPopularGuides(6);
 
@@ -72,8 +63,8 @@ function SearchContent() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {results.map(({ guide }) => (
-                <GuideCard key={guide.id} guide={guide} />
+              {results.map(result => (
+                <DecisionSearchCard key={`${result.type}-${result.href}`} result={result} />
               ))}
             </div>
           </section>

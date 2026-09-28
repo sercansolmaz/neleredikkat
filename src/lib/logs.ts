@@ -11,7 +11,7 @@ export interface LogEntry {
 const LOG_FILE_PATH = path.join(process.cwd(), 'missing_searches.json');
 
 // In-memory fallback if filesystem writes are restricted in serverless environments
-let inMemoryLogs: LogEntry[] = [];
+const inMemoryLogs: LogEntry[] = [];
 
 export function recordSearchLog(query: string, resultFound: boolean, resultCount = 0): LogEntry {
   const cleanQuery = query.trim().toLowerCase();

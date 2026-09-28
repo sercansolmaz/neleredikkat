@@ -4,8 +4,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { getJourneyBySlug, DECISION_JOURNEYS } from '@/data/journeys';
 import { getGuideById } from '@/data/guides';
-import GuideCard from '@/components/GuideCard';
-import { Compass, ChevronRight, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Compass, ChevronRight, ArrowRight } from 'lucide-react';
 
 interface JourneyPageProps {
   params: Promise<{
@@ -73,7 +72,7 @@ export default async function JourneyDetailPage({ params }: JourneyPageProps) {
 
       {/* Steps List */}
       <div className="space-y-8 relative before:absolute before:inset-0 before:left-6 sm:before:left-8 before:w-0.5 before:bg-amber-200 dark:before:bg-amber-900/60 before:z-0">
-        {journey.steps.map((step, idx) => {
+        {journey.steps.map(step => {
           const guide = getGuideById(step.guideId);
 
           return (

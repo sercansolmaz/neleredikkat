@@ -25,7 +25,7 @@ export default function Footer() {
             <div className="pt-2">
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-800 text-[11px] font-medium text-emerald-400 border border-slate-700">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                Sıfır AI Yanılması & %100 Doğrulanmış Kriterler
+                Editoryal yöntem ve kapsam bilgisi
               </span>
             </div>
             <div className="flex items-start gap-2 bg-slate-800/80 p-3 rounded-xl border border-slate-700/60">
@@ -91,6 +91,9 @@ export default function Footer() {
                 </a>
               </p>
               <div className="pt-1 space-y-1.5">
+                <Link href="/#karar-merkezleri" className="block text-[11px] text-slate-400 hover:text-emerald-400 transition-colors">Karar Merkezleri</Link>
+                <Link href="/araclar/" className="block text-[11px] text-slate-400 hover:text-emerald-400 transition-colors">Karar Araçları</Link>
+                <Link href="/yolculuklar/" className="block text-[11px] text-slate-400 hover:text-emerald-400 transition-colors">Karar Yolculukları</Link>
                 <Link href="/hakkimizda/" className="block text-[11px] text-slate-400 hover:text-emerald-400 transition-colors">Hakkımızda</Link>
                 <Link href="/metodoloji/" className="block text-[11px] text-slate-400 hover:text-emerald-400 transition-colors">Metodoloji — Rehberler Nasıl Yazılır?</Link>
                 <Link href="/editorial-ekip/" className="block text-[11px] text-slate-400 hover:text-emerald-400 transition-colors">Editoryal Ekip ve Uzmanlık Alanları</Link>

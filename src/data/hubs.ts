@@ -8,6 +8,8 @@ import { Guide } from '@/types/guide';
 
 export interface DecisionHub {
   slug: string;              // /konu/<slug>/
+  categorySlug: string;
+  ogImage: string;
   title: string;
   h1: string;
   description: string;
@@ -28,6 +30,8 @@ export interface DecisionHub {
 export const DECISION_HUBS: DecisionHub[] = [
   {
     slug: 'ikinci-el-arac',
+    categorySlug: 'otomobil-motosiklet',
+    ogImage: '/og/konu/ikinci-el-arac.png',
     title: 'İkinci El Araç Karar Merkezi',
     h1: 'İkinci El Araç Alırken Karar Merkezi — Tüm Kontroller Tek Çatı Altında',
     description: 'İkinci el araç alırken bütçeden ekspertize, hasar kaydından devreye kadar tüm karar adımları, kontrol listeleri ve maliyet araçları tek merkezde.',
@@ -86,6 +90,8 @@ export const DECISION_HUBS: DecisionHub[] = [
   },
   {
     slug: 'ev-kiralama',
+    categorySlug: 'ev-yasam',
+    ogImage: '/og/konu/ev-kiralama.png',
     title: 'Ev Kiralama Karar Merkezi',
     h1: 'Ev Kiralarken Karar Merkezi — İlandan Yerleşmeye Tüm Adımlar',
     description: 'Ev kiralarken bütçeden sözleşmeye, taşınmadan eve yerleşmeye kadar tüm karar adımları, kontrol listeleri ve maliyet hesaplama araçları tek merkezde.',
@@ -144,6 +150,8 @@ export const DECISION_HUBS: DecisionHub[] = [
   },
   {
     slug: 'klima',
+    categorySlug: 'ev-yasam',
+    ogImage: '/og/konu/klima.png',
     title: 'Klima Karar Merkezi',
     h1: 'Klima Alırken Karar Merkezi — Kapasiteden Montaja Tüm Adımlar',
     description: 'Klima alırken BTU kapasitesinden inverter teknolojisine, montajdan bakıma kadar tüm karar adımları ve hesaplama araçları tek merkezde.',
@@ -196,6 +204,8 @@ export const DECISION_HUBS: DecisionHub[] = [
   },
   {
     slug: 'podcast-kurulumu',
+    categorySlug: 'ses-muzik-creator',
+    ogImage: '/og/konu/podcast-kurulumu.png',
     title: 'Podcast Kurulum Merkezi',
     h1: 'Podcast Setup Kurarken Karar Merkezi — Ses ve Görüntü Tüm Adımlar',
     description: 'Podcast kurarken mikrofon tipinden ses kartına, görüntü ekipmanına kadar tüm karar adımları, seçim araçları ve kontrol listeleri tek merkezde.',
@@ -223,6 +233,10 @@ export const DECISION_HUBS: DecisionHub[] = [
 
 export function getHubBySlug(slug: string): DecisionHub | undefined {
   return DECISION_HUBS.find(h => h.slug === slug);
+}
+
+export function getHubsForGuide(guideId: string): DecisionHub[] {
+  return DECISION_HUBS.filter(hub => hub.stages.some(stage => stage.guideIds.includes(guideId)));
 }
 
 /** Hub'un referans verdiği tüm rehberleri ( Guide[] ) sırayla döndürür. */

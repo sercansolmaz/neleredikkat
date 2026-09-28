@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { MissingSearchSummary } from '@/lib/logs';
-import { ShieldAlert, RefreshCw, Layers, TrendingUp, Search, Clock } from 'lucide-react';
+import { Search, RefreshCw, TrendingUp, Clock, ShieldAlert } from 'lucide-react';
 
 export default function AdminMissingSearchesPage() {
   const [summaries, setSummaries] = useState<MissingSearchSummary[]>([]);
@@ -25,6 +25,8 @@ export default function AdminMissingSearchesPage() {
   };
 
   useEffect(() => {
+    // Initial remote data hydration; the state write happens after network I/O.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchSummaries();
   }, []);
 

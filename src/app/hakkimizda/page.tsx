@@ -66,8 +66,8 @@ export default function HakkimizdaPage() {
             <h2 className="font-bold text-slate-900 dark:text-white mb-1">Ne yapmıyoruz</h2>
             <ul className="list-disc pl-5 space-y-1.5">
               <li>Ürün veya model önermiyoruz — "hangi tipi ara" diyoruz, "hangi markayı al" demiyoruz.</li>
-              <li>Satış veya yönlendirme komisyonuyla çalışan bir vitrin değiliz.</li>
-              <li>Sponsorlu içerikte cevaplar para ile değişmez; iş birlikleri açıkça etiketlenir.</li>
+              <li>Ürün/model satış komisyonuna göre sıralanan bir vitrin değiliz.</li>
+              <li>Sponsorlu görünürlük alanları açıkça etiketlenir; sponsor rehber kriterlerini, karar sonucunu veya sıralamayı değiştiremez.</li>
               <li>Hukuki, tıbbi veya finansal danışmanlık vermiyoruz — karar destekçisiyiz.</li>
             </ul>
           </div>
@@ -94,12 +94,12 @@ export default function HakkimizdaPage() {
           Rehberlerimizi nasıl yazdığımızı ve güncellediğimizi{' '}
           <Link href="/metodoloji/" className="font-bold text-emerald-700 dark:text-emerald-400 hover:underline">Metodoloji sayfasında</Link>{' '}
           şeffaf biçimde paylaşıyoruz. Ses ve müzik teknolojisi alanındaki rehberler 20 yıllık saha
-          deneyimiyle, diğer alanlar mevzuat ve sektör pratiği kaynaklarıyla yazılır — her rehberin
-          güven kaynağı sayfasında görünür.
+          deneyimiyle; diğer alanlardaki içerikler mevcut mevzuat, resmi standartlar, üretici dokümantasyonu ve
+          editoryal araştırma temelinde hazırlanır. Uzman incelemesi yapılan rehberlerde bu bilgi ayrıca görünür.
         </p>
         <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
           <RefreshCw className="w-3.5 h-3.5" />
-          Rehberler düzenli olarak gözden geçirilir; gözden geçirme tarihi her sayfada yazılıdır.
+          Her rehberde içerik güncelleme tarihi; uzman incelemesi yapılan rehberlerde ayrıca gözden geçirme tarihi gösterilir.
         </div>
       </section>
     </div>

@@ -101,7 +101,7 @@ def wrap_title(draw, title, font, max_width):
     return lines[:4]
 
 
-def make_og(slug, cat, title):
+def make_og(slug, cat, title, output_dir=None):
     pair = PALETTE.get(cat, DEFAULT_PAIR)
     img = Image.new("RGB", (W, H), pair[0])
     d = ImageDraw.Draw(img)
@@ -154,7 +154,7 @@ def make_og(slug, cat, title):
     f_sub = ImageFont.truetype(FONT_REG, 24)
     d.text((72, H - 48), "Satın almadan önce nelere dikkat edilmeli?", font=f_sub, fill=(235, 240, 240))
 
-    outdir = os.path.join(OUT, cat)
+    outdir = os.path.join(OUT, output_dir or cat)
     os.makedirs(outdir, exist_ok=True)
     outpath = os.path.join(outdir, f"{slug}.png")
     img.save(outpath, "PNG", optimize=True)
@@ -207,6 +207,20 @@ def main():
             made += 1
         except Exception as e:
             print(f"HATA arac {slug}: {e}", file=sys.stderr)
+    # Karar merkezleri görselleri — /konu/* sayfaları
+    hubs = [
+        ("ikinci-el-arac", "otomobil-motosiklet", "İkinci El Araç Karar Merkezi"),
+        ("ev-kiralama", "ev-yasam", "Ev Kiralama Karar Merkezi"),
+        ("klima", "ev-yasam", "Klima Karar Merkezi"),
+        ("podcast-kurulumu", "ses-muzik-creator", "Podcast Kurulum Merkezi"),
+    ]
+    for slug, cat, title in hubs:
+        try:
+            make_og(slug, cat, title, "konu")
+            made += 1
+        except Exception as e:
+            print(f"HATA konu {slug}: {e}", file=sys.stderr)
+
     # Araçlar indeks görseli
     try:
         make_og("_araclar", "teknoloji", "Karar Araçları — Hesaplayıcılar")

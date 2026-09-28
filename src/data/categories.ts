@@ -83,15 +83,6 @@ export const CATEGORIES: Category[] = [
     popularTopics: ['İnternet paketi seçerken', 'Hosting alırken', 'VPN seçerken']
   },
   {
-    id: 'is-egitim',
-    slug: 'is-egitim',
-    name: 'İş & Eğitim',
-    description: 'Online kurs, çalışma alanı, eğitim materyali ve yazılım seçimleri.',
-    iconName: 'GraduationCap',
-    color: 'violet',
-    popularTopics: ['Online kurs seçerken', 'Dil okulu seçerken', 'Ergonomik masa alırken']
-  },
-  {
     id: 'ses-muzik-creator',
     slug: 'ses-muzik-creator',
     name: 'Ses, Müzik & Creator',

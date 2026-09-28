@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ChevronRight, Mail, Clock, ShieldCheck, Megaphone, MessageSquareHeart } from 'lucide-react';
+import { ChevronRight, Clock, ShieldCheck, Megaphone, MessageSquareHeart } from 'lucide-react';
 import ContactForm from '@/components/ContactForm';
 
 export const metadata: Metadata = {

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Search, Compass, Layers, Menu, X, ShieldCheck } from 'lucide-react';
+import { Search, Compass, Layers, Menu, X, ShieldCheck, Calculator } from 'lucide-react';
 import { CATEGORIES } from '@/data/categories';
 import { getGuidesByCategory } from '@/data/guides';
 import QuickSearchOverlay from '@/components/QuickSearchOverlay';
@@ -74,6 +74,22 @@ export default function Navbar() {
             </div>
 
             <Link
+              href="/#karar-merkezleri"
+              className="flex items-center gap-1.5 text-slate-700 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400 py-2 transition-colors"
+            >
+              <Compass className="w-4 h-4 text-blue-500" />
+              <span>Merkezler</span>
+            </Link>
+
+            <Link
+              href="/araclar/"
+              className="flex items-center gap-1.5 text-slate-700 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400 py-2 transition-colors"
+            >
+              <Calculator className="w-4 h-4 text-emerald-600" />
+              <span>Araçlar</span>
+            </Link>
+
+            <Link
               href="/yolculuklar"
               className="flex items-center gap-1.5 text-slate-700 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400 py-2 transition-colors"
             >
@@ -126,6 +142,24 @@ export default function Navbar() {
             <Search className="w-5 h-5 text-emerald-600" />
             <span>Neye dikkat etmelisin? Arama Yap</span>
           </button>
+
+          <Link
+            href="/#karar-merkezleri"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center gap-3 p-3 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl font-medium"
+          >
+            <Compass className="w-5 h-5 text-blue-500" />
+            <span>Karar Merkezleri</span>
+          </Link>
+
+          <Link
+            href="/araclar/"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center gap-3 p-3 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl font-medium"
+          >
+            <Calculator className="w-5 h-5 text-emerald-600" />
+            <span>Karar Araçları</span>
+          </Link>
 
           <Link
             href="/yolculuklar"

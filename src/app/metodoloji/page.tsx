@@ -41,7 +41,7 @@ export default function MetodolojiPage() {
     {
       icon: <CalendarClock className="w-5 h-5 text-emerald-600" />,
       title: '4. Gözden geçir ve tarih yaz',
-      desc: 'Rehberler düzenli gözden geçirilir. Gözden geçirme tarihi ve güven kaynağı her sayfada görünür; mevzuat bağımlı içeriklerde (kira, araç) değişiklik anında yansıtılır.'
+      desc: 'Rehberler kapsam ve risk düzeyine göre gözden geçirilir. Uzman incelemesi yapılan sayfalarda gözden geçiren kişi, tarih ve uzmanlık alanı ayrıca görünür; diğer sayfalarda yalnız içerik güncelleme tarihi gösterilir.'
     }
   ];
 
@@ -94,7 +94,7 @@ export default function MetodolojiPage() {
         </h2>
         <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed list-disc pl-5">
           <li>Ürün/model sıralaması ve "en iyi" listeleri üretmeyiz — bunun için veri tabanımız veya test laboratuvarımız yok ve olmayan şeyi sıralamak güveni bozar.</li>
-          <li>Ücretli yerleştirme veya link satışı yapmayız.</li>
+          <li>Sponsorluk, yalnız açıkça etiketlenen görünürlük alanlarında kabul edilir; rehber kriterleri, karar sonucu ve sıralama sponsor tarafından değiştirilemez.</li>
           <li>Kaynağı belirsiz "uzmanlar öneriyor" cümleleri kullanmayız — her genelleme ya kaynağıyla ya deneyim etiketiyle gelir.</li>
           <li>Rehberleri sorgu hacmine göre değil, karar riskine göre önceliklendiririz.</li>
         </ul>

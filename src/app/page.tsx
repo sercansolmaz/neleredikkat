@@ -79,7 +79,7 @@ export default function HomePage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
 
         {/* Section 0: Karar Merkezleri */}
-        <section className="space-y-6">
+        <section id="karar-merkezleri" className="space-y-6 scroll-mt-24">
           <div className="space-y-1">
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
               <Calculator className="w-5 h-5 text-emerald-600" />

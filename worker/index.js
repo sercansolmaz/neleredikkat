@@ -34,6 +34,32 @@ function json(data, status, origin) {
   });
 }
 
+export function updateSearchStats(existing, resultFound, timestamp = new Date().toISOString()) {
+  const legacyCount = Number(existing?.count) || 0;
+  const totalCount = Number(existing?.totalCount) || legacyCount;
+  const missingCount = Number(existing?.missingCount) || (existing?.lastMissing ? legacyCount : 0);
+  const foundCount = Number(existing?.foundCount) || Math.max(0, totalCount - missingCount);
+  return {
+    totalCount: totalCount + 1,
+    missingCount: missingCount + (resultFound ? 0 : 1),
+    foundCount: foundCount + (resultFound ? 1 : 0),
+    lastFound: resultFound ? timestamp : existing?.lastFound || null,
+    lastMissing: resultFound ? existing?.lastMissing || null : timestamp,
+    lastSearched: timestamp
+  };
+}
+
+export function summarizeMissingSearch(key, value) {
+  if (!value?.lastMissing) return null;
+  const legacyCount = Number(value.count) || 0;
+  return {
+    query: key.slice(4),
+    count: Number(value.missingCount) || legacyCount,
+    totalCount: Number(value.totalCount) || legacyCount,
+    lastSearched: value.lastMissing
+  };
+}
+
 // ---------- Admin gate yardımcıları ----------
 
 function parseCookies(request) {
@@ -122,7 +148,7 @@ async function isAdmin(request, env) {
 
 // ---------- Ana fetch ----------
 
-export default {
+const worker = {
   async fetch(request, env) {
     const url = new URL(request.url);
     const origin = request.headers.get('Origin');
@@ -187,20 +213,15 @@ export default {
           if (!query) return json({ error: 'Query is required' }, 400, origin);
 
           const resultFound = Boolean(body.resultFound);
-          const resultCount = Number(body.resultCount) || 0;
           const kvKey = `log:${query}`;
 
           const existing = await env.ND_LOGS.get(kvKey, 'json');
-          const entry = existing || { count: 0, lastFound: null, lastMissing: null, lastSearched: null };
-          entry.count += 1;
-          entry.lastSearched = new Date().toISOString();
-          if (resultFound) entry.lastFound = entry.lastSearched;
-          else entry.lastMissing = entry.lastSearched;
+          const entry = updateSearchStats(existing, resultFound);
 
           await env.ND_LOGS.put(kvKey, JSON.stringify(entry));
 
           return json({ success: true, entry }, 200, origin);
-        } catch (err) {
+        } catch {
           return json({ error: 'Internal Server Error' }, 500, origin);
         }
       }
@@ -214,13 +235,8 @@ export default {
         const summaries = [];
         for (const key of list.keys) {
           const val = await env.ND_LOGS.get(key.name, 'json');
-          if (val && val.lastMissing) {
-            summaries.push({
-              query: key.name.slice(4),
-              count: val.count,
-              lastSearched: val.lastSearched
-            });
-          }
+          const summary = summarizeMissingSearch(key.name, val);
+          if (summary) summaries.push(summary);
         }
         summaries.sort((a, b) => b.count - a.count);
         return json({ summaries }, 200, origin);
@@ -238,3 +254,5 @@ export default {
     return env.ASSETS.fetch(request);
   }
 };
+
+export default worker;

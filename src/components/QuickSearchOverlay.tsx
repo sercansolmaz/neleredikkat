@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { Search, ArrowRight, ShieldAlert, ChevronRight, X } from 'lucide-react';
-import { searchGuides, SearchResult } from '@/lib/search';
+import { searchDecisionContent, DecisionSearchResult } from '@/lib/search';
 
 interface QuickSearchOverlayProps {
   open: boolean;
@@ -17,16 +17,12 @@ interface QuickSearchOverlayProps {
 export default function QuickSearchOverlay({ open, onClose }: QuickSearchOverlayProps) {
   const router = useRouter();
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState<SearchResult[]>([]);
   const [activeIndex, setActiveIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Açılınca focus + body scroll kilidi
   useEffect(() => {
     if (open) {
-      setQuery('');
-      setResults([]);
-      setActiveIndex(-1);
       document.body.style.overflow = 'hidden';
       // Overlay mount sonrası focus
       const t = setTimeout(() => inputRef.current?.focus(), 30);
@@ -38,23 +34,21 @@ export default function QuickSearchOverlay({ open, onClose }: QuickSearchOverlay
     document.body.style.overflow = '';
   }, [open]);
 
-  // Live search
-  useEffect(() => {
-    const trimmed = query.trim();
-    if (trimmed.length >= 2) {
-      const matched = searchGuides(trimmed);
-      setResults(matched.slice(0, 7));
-      setActiveIndex(matched.length > 0 ? 0 : -1);
-    } else {
-      setResults([]);
-      setActiveIndex(-1);
-    }
-  }, [query]);
+  const trimmedQuery = query.trim();
+  const results: DecisionSearchResult[] = trimmedQuery.length >= 2
+    ? searchDecisionContent(trimmedQuery, 7).slice(0, 7)
+    : [];
+
+  const close = useCallback(() => {
+    setQuery('');
+    setActiveIndex(-1);
+    onClose();
+  }, [onClose]);
 
   const go = useCallback((path: string) => {
-    onClose();
+    close();
     router.push(path);
-  }, [onClose, router]);
+  }, [close, router]);
 
   const goToAllResults = useCallback(() => {
     const q = query.trim();
@@ -67,7 +61,7 @@ export default function QuickSearchOverlay({ open, onClose }: QuickSearchOverlay
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Escape') {
       e.preventDefault();
-      onClose();
+      close();
       return;
     }
     if (e.key === 'ArrowDown') {
@@ -89,8 +83,7 @@ export default function QuickSearchOverlay({ open, onClose }: QuickSearchOverlay
         return;
       }
       if (activeIndex >= 0 && activeIndex < results.length) {
-        const { guide } = results[activeIndex];
-        go(`/${guide.categorySlug}/${guide.slug}`);
+        go(results[activeIndex].href);
       } else {
         goToAllResults();
       }
@@ -107,7 +100,7 @@ export default function QuickSearchOverlay({ open, onClose }: QuickSearchOverlay
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-slate-950/60 backdrop-blur-sm animate-in fade-in duration-150"
-        onClick={onClose}
+        onClick={close}
       />
 
       {/* Panel */}
@@ -120,7 +113,11 @@ export default function QuickSearchOverlay({ open, onClose }: QuickSearchOverlay
             ref={inputRef}
             type="text"
             value={query}
-            onChange={e => setQuery(e.target.value)}
+            onChange={e => {
+              const value = e.target.value;
+              setQuery(value);
+              setActiveIndex(value.trim().length >= 2 ? 0 : -1);
+            }}
             onKeyDown={handleKeyDown}
             placeholder="Neye dikkat etmelisin? Örn: laptop alırken..."
             className="w-full py-4 text-sm sm:text-base bg-transparent outline-none placeholder:text-slate-400 dark:placeholder:text-slate-500 text-slate-900 dark:text-white"
@@ -128,7 +125,7 @@ export default function QuickSearchOverlay({ open, onClose }: QuickSearchOverlay
             autoComplete="off"
           />
           <button
-            onClick={onClose}
+            onClick={close}
             className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors flex-shrink-0"
             aria-label="Kapat"
           >
@@ -142,12 +139,12 @@ export default function QuickSearchOverlay({ open, onClose }: QuickSearchOverlay
             results.length > 0 ? (
               <div className="p-2">
                 <div className="px-3 py-1.5 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
-                  Eşleşen Rehberler ({results.length})
+                  Eşleşen Karar İçerikleri ({results.length})
                 </div>
-                {results.map(({ guide }, idx) => (
+                {results.map((result, idx) => (
                   <button
-                    key={guide.id}
-                    onClick={() => go(`/${guide.categorySlug}/${guide.slug}`)}
+                    key={`${result.type}-${result.href}`}
+                    onClick={() => go(result.href)}
                     onMouseEnter={() => setActiveIndex(idx)}
                     className={`w-full text-left flex items-center justify-between gap-3 p-3 rounded-xl transition-colors ${
                       activeIndex === idx
@@ -157,14 +154,13 @@ export default function QuickSearchOverlay({ open, onClose }: QuickSearchOverlay
                   >
                     <div className="min-w-0 space-y-0.5">
                       <span className="text-sm font-semibold text-slate-900 dark:text-white block truncate">
-                        {guide.title}
+                        {result.title}
                       </span>
                       <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-                        <span className="capitalize font-medium text-emerald-600 dark:text-emerald-400">
-                          {guide.categorySlug.replace('-', ' ')}
+                        <span className="font-medium text-emerald-600 dark:text-emerald-400">
+                          {result.type === 'hub' ? 'Karar Merkezi' : result.type === 'tool' ? 'Araç' : result.type === 'journey' ? 'Yolculuk' : 'Rehber'}
                         </span>
-                        <span>•</span>
-                        <span className="whitespace-nowrap">{guide.checklistItems.length} kontrol</span>
+                        {result.category && <><span>•</span><span className="capitalize">{result.category.replaceAll('-', ' ')}</span></>}
                       </div>
                     </div>
                     <ChevronRight className={`w-4 h-4 flex-shrink-0 transition-colors ${

@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Search, ArrowRight, ShieldAlert, Sparkles, ChevronRight } from 'lucide-react';
-import { searchGuides, SearchResult } from '@/lib/search';
+import { searchDecisionContent, DecisionSearchResult } from '@/lib/search';
 
 interface SearchBarProps {
   placeholder?: string;
@@ -24,7 +24,6 @@ const ROTATING_EXAMPLES = [
 export default function SearchBar({ placeholder, autoFocus = false, size = 'large' }: SearchBarProps) {
   const router = useRouter();
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState<SearchResult[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -38,17 +37,9 @@ export default function SearchBar({ placeholder, autoFocus = false, size = 'larg
     return () => clearInterval(interval);
   }, [placeholder]);
 
-  // Live search trigger
-  useEffect(() => {
-    if (query.trim().length >= 2) {
-      const matched = searchGuides(query);
-      setResults(matched.slice(0, 5));
-      setIsOpen(true);
-    } else {
-      setResults([]);
-      setIsOpen(false);
-    }
-  }, [query]);
+  const results: DecisionSearchResult[] = query.trim().length >= 2
+    ? searchDecisionContent(query, 5).slice(0, 5)
+    : [];
 
   // Handle outside click
   useEffect(() => {
@@ -85,7 +76,11 @@ export default function SearchBar({ placeholder, autoFocus = false, size = 'larg
         <input
           type="text"
           value={query}
-          onChange={e => setQuery(e.target.value)}
+          onChange={e => {
+            const value = e.target.value;
+            setQuery(value);
+            setIsOpen(value.trim().length >= 2);
+          }}
           onFocus={() => query.trim().length >= 2 && setIsOpen(true)}
           autoFocus={autoFocus}
           placeholder={
@@ -135,27 +130,26 @@ export default function SearchBar({ placeholder, autoFocus = false, size = 'larg
           {results.length > 0 ? (
             <div className="p-2 space-y-1">
               <div className="px-3 py-1.5 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
-                Eşleşen Rehberler ({results.length})
+                Eşleşen Karar İçerikleri ({results.length})
               </div>
-              {results.map(({ guide }) => (
+              {results.map(result => (
                 <button
-                  key={guide.id}
+                  key={`${result.type}-${result.href}`}
                   onClick={() => {
                     setIsOpen(false);
-                    router.push(`/${guide.categorySlug}/${guide.slug}`);
+                    router.push(result.href);
                   }}
                   className="w-full text-left flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/60 transition-colors group"
                 >
-                  <div className="space-y-0.5">
-                    <span className="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors block">
-                      {guide.title}
+                  <div className="space-y-0.5 min-w-0">
+                    <span className="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors block truncate">
+                      {result.title}
                     </span>
                     <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-                      <span className="capitalize font-medium text-emerald-600 dark:text-emerald-400">
-                        {guide.categorySlug.replace('-', ' ')}
+                      <span className="font-medium text-emerald-600 dark:text-emerald-400">
+                        {result.type === 'hub' ? 'Karar Merkezi' : result.type === 'tool' ? 'Araç' : result.type === 'journey' ? 'Yolculuk' : 'Rehber'}
                       </span>
-                      <span>•</span>
-                      <span>{guide.checklistItems.length} kontrol maddesi</span>
+                      {result.category && <><span>•</span><span className="capitalize">{result.category.replaceAll('-', ' ')}</span></>}
                     </div>
                   </div>
                   <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-emerald-600 group-hover:translate-x-0.5 transition-all" />

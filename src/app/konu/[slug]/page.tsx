@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { GUIDES, getGuideById } from '@/data/guides';
 import { getHubBySlug, getHubGuides, DECISION_HUBS } from '@/data/hubs';
+import { getCategoryBySlug } from '@/data/categories';
 import { Calculator, ChevronRight, ClipboardCheck, Compass, HelpCircle } from 'lucide-react';
 
 interface HubPageProps {
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: HubPageProps): Promise<Metada
       title: hub.title,
       description: hub.description,
       url: `https://neleredikkat.com/konu/${hub.slug}/`,
-      images: [{ url: `/og/otomobil-motosiklet/_kategori.png`, width: 1200, height: 630, alt: hub.title }]
+      images: [{ url: hub.ogImage, width: 1200, height: 630, alt: hub.title }]
     }
   };
 }
@@ -37,6 +38,7 @@ export default async function HubPage({ params }: HubPageProps) {
   if (!hub) notFound();
 
   const stages = getHubGuides(hub, GUIDES);
+  const category = getCategoryBySlug(hub.categorySlug);
   const totalGuides = stages.reduce((n, s) => n + s.guides.length, 0);
   const baseUrl = 'https://neleredikkat.com';
   const hubUrl = `${baseUrl}/konu/${hub.slug}/`;
@@ -181,10 +183,10 @@ export default async function HubPage({ params }: HubPageProps) {
       {/* Bağlı kategori */}
       <div className="flex flex-wrap items-center justify-between gap-3 text-xs bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-4">
         <span className="text-slate-600 dark:text-slate-300">
-          Bu merkez, tüm otomobil ve motosiklet kararlarını kapsayan kategori sayfasının paralelinde çalışır.
+          Bu merkez, <strong>{category?.name || hub.categorySlug}</strong> kararlarının sıralı bir bölümünü tek akışta toplar.
         </span>
-        <Link href="/otomobil-motosiklet/" className="font-bold text-emerald-700 dark:text-emerald-400 hover:underline flex-shrink-0">
-          Otomobil & Motosiklet kategorisi →
+        <Link href={`/${hub.categorySlug}/`} className="font-bold text-emerald-700 dark:text-emerald-400 hover:underline flex-shrink-0">
+          {category?.name || hub.categorySlug} kategorisi →
         </Link>
       </div>
     </div>

@@ -6,6 +6,7 @@ import { getGuideBySlug, GUIDES, getGuideById } from '@/data/guides';
 import { getCategoryBySlug } from '@/data/categories';
 import { getJourneyBySlug } from '@/data/journeys';
 import { getNeedChain } from '@/data/needChains';
+import { getHubsForGuide } from '@/data/hubs';
 import InteractiveChecklist from '@/components/InteractiveChecklist';
 import RedFlags from '@/components/RedFlags';
 import SellerQuestions from '@/components/SellerQuestions';
@@ -38,24 +39,6 @@ const TOOLS_FOR_GUIDE: Record<string, { href: string; title: string; desc: strin
     title: 'Araç Sahip Olma Maliyeti Hesaplama',
     desc: 'Yakıt + MTV + kasko + bakım + değer kaybı: aracın aylık gerçek maliyetini gör.'
   }
-};
-
-/**
- * Rehber → konu merkezi eşlemesi: hub'a bağlı rehberlerde çatı bandı gösterir.
- * slug → hub başlığı (link /konu/<hub-slug>/ formatında kurulur).
- */
-const HUB_FOR_GUIDE: Record<string, { slug: string; name: string }> = {
-  'ikinci-el-araba-alirken': { slug: 'ikinci-el-arac', name: 'İkinci El Araç Karar Merkezi' },
-  'hibrit-otomobil-alirken': { slug: 'ikinci-el-arac', name: 'İkinci El Araç Karar Merkezi' },
-  'ikinci-el-elektrikli-otomobil-alirken': { slug: 'ikinci-el-arac', name: 'İkinci El Araç Karar Merkezi' },
-  'ev-sarj-istasyonu-alirken': { slug: 'ikinci-el-arac', name: 'İkinci El Araç Karar Merkezi' },
-  'otomobil-lastigi-alirken': { slug: 'ikinci-el-arac', name: 'İkinci El Araç Karar Merkezi' },
-  'arac-akusu-alirken': { slug: 'ikinci-el-arac', name: 'İkinci El Araç Karar Merkezi' },
-  'arac-kamerasi-alirken': { slug: 'ikinci-el-arac', name: 'İkinci El Araç Karar Merkezi' },
-  'arac-brandasi-alirken': { slug: 'ikinci-el-arac', name: 'İkinci El Araç Karar Merkezi' },
-  'tavan-bagaji-alirken': { slug: 'ikinci-el-arac', name: 'İkinci El Araç Karar Merkezi' },
-  'aku-takviye-cihazi-alirken': { slug: 'ikinci-el-arac', name: 'İkinci El Araç Karar Merkezi' },
-  'arac-kompresoru-alirken': { slug: 'ikinci-el-arac', name: 'İkinci El Araç Karar Merkezi' }
 };
 
 interface GuidePageProps {
@@ -114,6 +97,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
   }
 
   const category = getCategoryBySlug(guide.categorySlug);
+  const guideHubs = getHubsForGuide(guide.id);
 
   // İhtiyaç zinciri: önce → birlikte → ikinci el → sonraki adım
   const needChain = getNeedChain(guide, GUIDES);
@@ -166,32 +150,22 @@ export default async function GuidePage({ params }: GuidePageProps) {
     headline: guide.title,
     description: guide.description,
     dateModified: guide.lastUpdated,
-    author: {
-      '@type': 'Organization',
-      name: 'NelerDikkat'
-    },
+    author: guide.reviewedBy
+      ? { '@type': 'Person', name: guide.reviewedBy }
+      : { '@type': 'Organization', name: 'NelerDikkat.com' },
+    ...(guide.reviewedBy && {
+      reviewedBy: { '@type': 'Person', name: guide.reviewedBy },
+      dateModified: guide.reviewedAt || guide.lastUpdated
+    }),
     publisher: {
       '@type': 'Organization',
       name: 'NelerDikkat.com',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://neleredikkat.com/og/teknoloji/default.png'
+        url: 'https://neleredikkat.com/logo.png'
       }
     }
   };
-
-  const faqJsonLd = guide.questions && guide.questions.length > 0 ? {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: guide.questions.map(q => ({
-      '@type': 'Question',
-      name: q.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: q.whyItMatters
-      }
-    }))
-  } : null;
 
   return (
     <article className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
@@ -205,12 +179,6 @@ export default async function GuidePage({ params }: GuidePageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
-      {faqJsonLd && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-        />
-      )}
 
       {/* Breadcrumb Navigation */}
       <nav className="flex items-center gap-2 text-xs font-medium text-slate-500">
@@ -315,21 +283,22 @@ export default async function GuidePage({ params }: GuidePageProps) {
         </Link>
       )}
 
-      {/* Rehber ↔ Konu merkezi köprüsü: hub'a bağlı rehberlerde çatı linki */}
-      {HUB_FOR_GUIDE[guide.slug] && (
+      {/* Rehber ↔ Konu merkezi köprüsü: hub verisinden otomatik geri bağlantılar */}
+      {guideHubs.map(hub => (
         <Link
-          href={`/konu/${HUB_FOR_GUIDE[guide.slug].slug}/`}
+          key={hub.slug}
+          href={`/konu/${hub.slug}/`}
           className="flex items-center justify-between gap-4 bg-white dark:bg-slate-800 border-2 border-blue-200 dark:border-blue-900 rounded-2xl px-5 sm:px-6 py-3.5 hover:border-blue-400 transition-colors"
         >
           <div className="flex items-center gap-3 min-w-0">
             <Compass className="w-5 h-5 text-blue-600 flex-shrink-0" />
             <div className="text-xs font-bold text-slate-700 dark:text-slate-200">
-              Bu rehber <span className="text-blue-700 dark:text-blue-400">{HUB_FOR_GUIDE[guide.slug].name}</span> karar merkezinin parçasıdır — tüm aşamaları tek çatıda gör.
+              Bu rehber <span className="text-blue-700 dark:text-blue-400">{hub.title}</span> karar merkezinin parçasıdır — tüm aşamaları tek çatıda gör.
             </div>
           </div>
           <span className="text-[11px] font-bold text-blue-700 dark:text-blue-400 flex-shrink-0">Merkeze git →</span>
         </Link>
-      )}
+      ))}
 
       {/* Bölüm 1: Kısa Cevap / Giriş Özet */}
       <section className="bg-white dark:bg-slate-800/80 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 p-6 sm:p-8 space-y-4">
@@ -360,7 +329,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
       </section>
 
       {/* Bölüm 4: İnteraktif Checklist */}
-      <section className="scroll-mt-20" id="checklist">
+      <section className="scroll-mt-20">
         <InteractiveChecklist
           guideSlug={guide.slug}
           guideTitle={guide.title}
