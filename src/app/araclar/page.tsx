@@ -24,6 +24,11 @@ const TOOLS = [
     href: '/araclar/ev-kira-maliyeti/',
     title: 'Ev Kira Maliyeti Hesaplama',
     description: 'Kira + aidat + depozito + emlakçı komisyonunu birlikte hesapla; ilk ay toplam çıkışı ve gelirine göre bütçe bandını gör.'
+  },
+  {
+    href: '/araclar/podcast-mikrofonu-secici/',
+    title: 'Podcast Mikrofonu Seçici',
+    description: 'Oda koşulun, konuşmacı sayın ve kullanım amacına göre USB/XLR ve dinamik/kondenser yönünü 4 soruda belirle.'
   }
 ];
 
