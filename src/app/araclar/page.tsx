@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: 'Karar Araçları — Hesaplayıcılar ve Seçiciler',
     description: 'Satın alma kararı öncesi kullanabileceğiniz ücretsiz hesaplama araçları.',
     url: 'https://neleredikkat.com/araclar/',
-    images: [{ url: '/og/teknoloji/default.png', width: 1200, height: 630, alt: 'Karar Araçları' }]
+    images: [{ url: '/og/teknoloji/_araclar.png', width: 1200, height: 630, alt: 'Karar Araçları' }]
   }
 };
 
@@ -29,6 +29,11 @@ const TOOLS = [
     href: '/araclar/podcast-mikrofonu-secici/',
     title: 'Podcast Mikrofonu Seçici',
     description: 'Oda koşulun, konuşmacı sayın ve kullanım amacına göre USB/XLR ve dinamik/kondenser yönünü 4 soruda belirle.'
+  },
+  {
+    href: '/araclar/arac-sahip-olma-maliyeti/',
+    title: 'Araç Sahip Olma Maliyeti Hesaplama',
+    description: 'Yakıt, MTV, kasko, bakım ve değer kaybını birlikte hesapla; aracın aylık gerçek sahip olma maliyetini gör.'
   }
 ];
 

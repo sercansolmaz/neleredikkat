@@ -32,6 +32,11 @@ const TOOLS_FOR_GUIDE: Record<string, { href: string; title: string; desc: strin
     href: '/araclar/podcast-mikrofonu-secici/',
     title: 'Podcast Mikrofonu Seçici',
     desc: 'Odan ve kullanımına göre USB/XLR ve dinamik/kondenser yönünü 4 soruda belirle.'
+  },
+  'ikinci-el-araba-alirken': {
+    href: '/araclar/arac-sahip-olma-maliyeti/',
+    title: 'Araç Sahip Olma Maliyeti Hesaplama',
+    desc: 'Yakıt + MTV + kasko + bakım + değer kaybı: aracın aylık gerçek maliyetini gör.'
   }
 };
 

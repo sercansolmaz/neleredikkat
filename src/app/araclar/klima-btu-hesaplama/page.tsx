@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: 'Klima BTU Hesaplama — Oda Alanına Göre Kaç BTU?',
     description: 'Odanın m²si ve koşullarına göre gereken klima kapasitesini hesaplayın.',
     url: 'https://neleredikkat.com/araclar/klima-btu-hesaplama/',
-    images: [{ url: '/og/ev-yasam/_kategori.png', width: 1200, height: 630, alt: 'Klima BTU Hesaplama' }]
+    images: [{ url: '/og/ev-yasam/klima-btu-hesaplama.png', width: 1200, height: 630, alt: 'Klima BTU Hesaplama' }]
   }
 };
 

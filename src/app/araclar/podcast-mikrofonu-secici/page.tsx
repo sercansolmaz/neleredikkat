@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: 'Podcast Mikrofonu Seçici — USB mi XLR mi, Dinamik mi Kondenser mi?',
     description: 'Oda koşulun ve kullanımına göre mikrofon tipini 4 soruda belirle.',
     url: 'https://neleredikkat.com/araclar/podcast-mikrofonu-secici/',
-    images: [{ url: '/og/ses-muzik-creator/_kategori.png', width: 1200, height: 630, alt: 'Podcast Mikrofonu Seçici' }]
+    images: [{ url: '/og/ses-muzik-creator/podcast-mikrofonu-secici.png', width: 1200, height: 630, alt: 'Podcast Mikrofonu Seçici' }]
   }
 };
 

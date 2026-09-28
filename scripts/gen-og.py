@@ -193,7 +193,27 @@ def main():
         made += 1
     except Exception as e:
         print(f"HATA default: {e}", file=sys.stderr)
-    print(f"toplam (kategori+default dahil): {made}")
+
+    # Karar araçları görselleri — /araclar/* sayfaları
+    tools = [
+        ("klima-btu-hesaplama", "ev-yasam", "Klima BTU Hesaplama"),
+        ("ev-kira-maliyeti", "ev-yasam", "Ev Kira Maliyeti Hesaplama"),
+        ("podcast-mikrofonu-secici", "ses-muzik-creator", "Podcast Mikrofonu Seçici"),
+        ("arac-sahip-olma-maliyeti", "otomobil-motosiklet", "Araç Sahip Olma Maliyeti"),
+    ]
+    for slug, cat, title in tools:
+        try:
+            make_og(slug, cat, title)
+            made += 1
+        except Exception as e:
+            print(f"HATA arac {slug}: {e}", file=sys.stderr)
+    # Araçlar indeks görseli
+    try:
+        make_og("_araclar", "teknoloji", "Karar Araçları — Hesaplayıcılar")
+        made += 1
+    except Exception as e:
+        print(f"HATA _araclar: {e}", file=sys.stderr)
+    print(f"toplam (kategori+default+araçlar dahil): {made}")
 
     # manifest — metadata'da kullanmak icin
     manifest = {f"{g['cat']}/{g['slug']}": True for g in guides}

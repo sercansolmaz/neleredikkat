@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: 'Ev Kira Maliyeti Hesaplama — Gerçek Aylık Maliyet Ne Kadar?',
     description: 'Kira, aidat, depozito ve komisyonu birlikte hesaplayın; ilk ay çıkışını görün.',
     url: 'https://neleredikkat.com/araclar/ev-kira-maliyeti/',
-    images: [{ url: '/og/ev-yasam/_kategori.png', width: 1200, height: 630, alt: 'Ev Kira Maliyeti Hesaplama' }]
+    images: [{ url: '/og/ev-yasam/ev-kira-maliyeti.png', width: 1200, height: 630, alt: 'Ev Kira Maliyeti Hesaplama' }]
   }
 };
 
