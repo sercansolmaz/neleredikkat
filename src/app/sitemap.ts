@@ -59,6 +59,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.9
     },
+    {
+      url: `${baseUrl}/konu/ev-kiralama/`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9
+    },
+    {
+      url: `${baseUrl}/konu/klima/`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9
+    },
     // /arama/ dahili arama sayfası: noindex,follow — sitemap'e girmez.
     {
       url: `${baseUrl}/iletisim/`,

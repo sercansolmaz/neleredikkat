@@ -8,7 +8,8 @@ import JourneyCard from '@/components/JourneyCard';
 import { getPopularGuides, getLatestGuides } from '@/data/guides';
 import { CATEGORIES } from '@/data/categories';
 import { DECISION_JOURNEYS } from '@/data/journeys';
-import { ShieldCheck, Compass, Sparkles, Layers, ArrowRight } from 'lucide-react';
+import { ShieldCheck, Compass, Sparkles, Layers, ArrowRight, Calculator } from 'lucide-react';
+import { DECISION_HUBS } from '@/data/hubs';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' }
@@ -76,7 +77,42 @@ export default function HomePage() {
       </section>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-        
+
+        {/* Section 0: Karar Merkezleri */}
+        <section className="space-y-6">
+          <div className="space-y-1">
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <Calculator className="w-5 h-5 text-emerald-600" />
+              Karar Merkezleri
+            </h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              Büyük kararları aşamalara bölen, hesaplama araçlarıyla desteklenen kapsamlı rehber çatıları.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+            {DECISION_HUBS.map(hub => (
+              <Link
+                key={hub.slug}
+                href={`/konu/${hub.slug}/`}
+                className="group bg-gradient-to-br from-white to-emerald-50/50 dark:from-slate-800 dark:to-slate-800/60 rounded-2xl border-2 border-emerald-100 dark:border-emerald-900/50 p-5 hover:border-emerald-400 dark:hover:border-emerald-600 transition-colors"
+              >
+                <div className="flex items-center gap-2 text-xs font-bold text-emerald-700 dark:text-emerald-400 mb-2">
+                  <Compass className="w-4 h-4" />
+                  <span>Karar Merkezi</span>
+                </div>
+                <div className="text-base font-extrabold text-slate-900 dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors leading-snug">
+                  {hub.title}
+                </div>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">{hub.description}</p>
+                <div className="text-xs font-bold text-emerald-600 dark:text-emerald-400 mt-3 flex items-center gap-1">
+                  Aşamaları gör <ArrowRight className="w-3.5 h-3.5" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+
         {/* Section 1: Popüler Rehberler */}
         <section className="space-y-6">
           <div className="flex items-center justify-between">

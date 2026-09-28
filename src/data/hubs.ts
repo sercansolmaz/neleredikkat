@@ -83,6 +83,116 @@ export const DECISION_HUBS: DecisionHub[] = [
         a: 'Genel kabul, 3-7 yaş bandıdır: ilk yılların yüksek değer kaybı geride kalmış, bakım maliyetleri henüz patlamamıştır. 8 yaş üstünde bakım-parça payı belirgin artar; her iki bantta da karar, araç bazlı kontrol listesiyle verilir.'
       }
     ]
+  },
+  {
+    slug: 'ev-kiralama',
+    title: 'Ev Kiralama Karar Merkezi',
+    h1: 'Ev Kiralarken Karar Merkezi — İlandan Yerleşmeye Tüm Adımlar',
+    description: 'Ev kiralarken bütçeden sözleşmeye, taşınmadan eve yerleşmeye kadar tüm karar adımları, kontrol listeleri ve maliyet hesaplama araçları tek merkezde.',
+    intro: [
+      'Ev kiralamak, çoğu insanın aylık bütçesinin en büyük kalemidir ve hata maliyeti bir yılla ölçülür: yanlış daire, yanlış sözleşme ya da hesaplanmamış aidat, yıl boyunca taşınır. Bu merkez kararı dört aşamaya böler.',
+      'Kural basittir: sözleşme imzalanmadan önce her aşamanın kontrol listesi tamamlanır. "Sonra hallederiz" diyerek atlanan depozito, komisyon veya malik kontrolü, taşındıktan sonra pazarlık gücünü tamamen ortadan kaldırır.'
+    ],
+    iconName: 'Home',
+    stages: [
+      {
+        key: 'bütçe',
+        label: '1. Bütçe Kararı',
+        desc: 'İlandaki kira sadece başlangıçtır; gerçek aylık maliyet aidat dahil hesaplanır.',
+        guideIds: []
+      },
+      {
+        key: 'ev-secimi',
+        label: '2. Ev Seçimi ve İnceleme',
+        desc: 'Ana rehber: ilan değerlendirme, malik kontrolü, ev gezisi kontrol listesi ve sözleşme maddeleri.',
+        guideIds: ['ev-kiralarken']
+      },
+      {
+        key: 'taşınma',
+        label: '3. Taşınma',
+        desc: 'Taşınma firması seçimi ve süreç kontrolü.',
+        guideIds: ['nakliyat-firmasi-secerken']
+      },
+      {
+        key: 'yerleşme',
+        label: '4. Eve Yerleşme ve İyileştirme',
+        desc: 'Konfor ve bakım kararları: iklimlendirme, tesisat, boya, temizlik ve tadilat hizmetleri.',
+        guideIds: ['klima-alirken', 'tesisatci-secerken', 'boya-ustasi-secerken', 'temizlik-sirketi-secerken', 'tadilat-firmasi-secerken', 'isi-yalitimi-yaptirirken', 'pvc-pencere-alirken', 'banyo-yaptirirken', 'mutfak-yaptirirken']
+      }
+    ],
+    tools: [
+      {
+        href: '/araclar/ev-kira-maliyeti/',
+        title: 'Ev Kira Maliyeti Hesaplama',
+        desc: 'Kira + aidat + depozito + komisyon: gerçek aylık maliyeti ve ilk ay çıkışını hesapla.'
+      }
+    ],
+    faq: [
+      {
+        q: 'Ev kiralarken ilk önce ne kontrol edilmeli?',
+        a: 'Önce bütçe: gerçek aylık maliyeti (kira + aidat) ve ilk ay toplam çıkışı (depozito + komisyon dahil) hesaplayın. Sonra evin kendisi değil, evin sahibi: tapu/malik kontrolü ve varsa ipotek-haciz durumu sözleşmeden önce doğrulanır.'
+      },
+      {
+        q: 'Emlakçı komisyonu yasal olarak ne kadar olabilir?',
+        a: 'Konut kiralamasında komisyon, yıllık kira bedelinin %8ini geçemez — pratikte yaklaşık bir aylık kiraya denk gelir. Fazlası isteniyorsa itiraz edilebilir.'
+      },
+      {
+        q: 'Depozito en fazla kaç aylık kira olabilir?',
+        a: 'Türk Borçlar Kanununa göre en fazla 3 aylık kira bedeli depozito istenebilir. Sözleşme usulüne uygun sonlandığında depozito iade edilir; iade edilmemesi halinde yazılı tutanak ve ödeme kanıtları belirleyici olur.'
+      }
+    ]
+  },
+  {
+    slug: 'klima',
+    title: 'Klima Karar Merkezi',
+    h1: 'Klima Alırken Karar Merkezi — Kapasiteden Montaja Tüm Adımlar',
+    description: 'Klima alırken BTU kapasitesinden inverter teknolojisine, montajdan bakıma kadar tüm karar adımları ve hesaplama araçları tek merkezde.',
+    intro: [
+      'Klima alımının iki pahalı hatası vardır: yanlış kapasite ve kötü montaj. Yanlış kapasite hem konforu hem elektrik faturasını bozar; kötü montaj ise verimli bir cihazı verimsiz çalıştırır. Bu merkez kararı bu iki riskin etrafında kurar.',
+      'Önce odanın ihtiyacı olan kapasite hesaplanır, sonra cihaz kriterleri karşılaştırılır, en son montaj koşulları netleştirilir. Sırayı bozmak — önce model beğenip sonra odaya uydurmaya çalışmak — en sık yapılan hatadır.'
+    ],
+    iconName: 'Thermometer',
+    stages: [
+      {
+        key: 'kapasite',
+        label: '1. Kapasite Hesabı',
+        desc: 'Odanın m²si ve koşulları gereken BTU değerini belirler; en kritik ilk adım.',
+        guideIds: []
+      },
+      {
+        key: 'cihaz',
+        label: '2. Cihaz Seçimi',
+        desc: 'Ana rehber: inverter teknolojisi, enerji sınıfı, ses seviyesi ve servis ağı kriterleri.',
+        guideIds: ['klima-alirken']
+      },
+      {
+        key: 'montaj',
+        label: '3. Montaj ve Kurulum',
+        desc: 'Cihaz kadar önemli olan montaj kararı: keşif, iç-dış ünite yerleşimi ve garanti koşulları.',
+        guideIds: ['klima-montaji-yaptirirken']
+      }
+    ],
+    tools: [
+      {
+        href: '/araclar/klima-btu-hesaplama/',
+        title: 'Klima BTU Hesaplama',
+        desc: 'Odanın m²si ve koşullarına göre gereken kapasiteyi 30 saniyede hesapla.'
+      }
+    ],
+    faq: [
+      {
+        q: 'Klima alırken önce ne yapılmalı?',
+        a: 'Önce kapasite hesabı: odanın m²si, tavan yüksekliği, güneş durumu, izolasyon ve kat konumuyla gereken BTU değeri bulunur. Kapasite belirlenmeden model karşılaştırmak, listeyi yanlış sıralamaktır.'
+      },
+      {
+        q: 'İnverter klima her zaman daha mı mantıklı?',
+        a: 'Uzun ve kesintili çalışma dönemlerinde (yaz boyunca yatak odası gibi) evet — inverter kompresör devri ihtiyaca göre ayarladığından tüketim düşer. Nadir ve kısa kullanımda fiyat farkı kendini amorti etmeyebilir; karar kullanım profiliyle verilir.'
+      },
+      {
+        q: 'Klima montajı neden bu kadar önemli?',
+        a: 'Montaj; iç-dış ünite mesafesi, boru izolasyonu ve eğim doğruluğu cihazın gerçek kapasitesini belirler. Yanlış montaj, verimli cihazı düşük verimle çalıştırır ve garanti kapsamını da riske atabilir. Ücretsiz keşif yapan yetkili servis tercih edilmelidir.'
+      }
+    ]
   }
 ];
 
