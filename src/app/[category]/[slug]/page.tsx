@@ -40,6 +40,24 @@ const TOOLS_FOR_GUIDE: Record<string, { href: string; title: string; desc: strin
   }
 };
 
+/**
+ * Rehber → konu merkezi eşlemesi: hub'a bağlı rehberlerde çatı bandı gösterir.
+ * slug → hub başlığı (link /konu/<hub-slug>/ formatında kurulur).
+ */
+const HUB_FOR_GUIDE: Record<string, { slug: string; name: string }> = {
+  'ikinci-el-araba-alirken': { slug: 'ikinci-el-arac', name: 'İkinci El Araç Karar Merkezi' },
+  'hibrit-otomobil-alirken': { slug: 'ikinci-el-arac', name: 'İkinci El Araç Karar Merkezi' },
+  'ikinci-el-elektrikli-otomobil-alirken': { slug: 'ikinci-el-arac', name: 'İkinci El Araç Karar Merkezi' },
+  'ev-sarj-istasyonu-alirken': { slug: 'ikinci-el-arac', name: 'İkinci El Araç Karar Merkezi' },
+  'otomobil-lastigi-alirken': { slug: 'ikinci-el-arac', name: 'İkinci El Araç Karar Merkezi' },
+  'arac-akusu-alirken': { slug: 'ikinci-el-arac', name: 'İkinci El Araç Karar Merkezi' },
+  'arac-kamerasi-alirken': { slug: 'ikinci-el-arac', name: 'İkinci El Araç Karar Merkezi' },
+  'arac-brandasi-alirken': { slug: 'ikinci-el-arac', name: 'İkinci El Araç Karar Merkezi' },
+  'tavan-bagaji-alirken': { slug: 'ikinci-el-arac', name: 'İkinci El Araç Karar Merkezi' },
+  'aku-takviye-cihazi-alirken': { slug: 'ikinci-el-arac', name: 'İkinci El Araç Karar Merkezi' },
+  'arac-kompresoru-alirken': { slug: 'ikinci-el-arac', name: 'İkinci El Araç Karar Merkezi' }
+};
+
 interface GuidePageProps {
   params: Promise<{
     category: string;
@@ -275,6 +293,22 @@ export default async function GuidePage({ params }: GuidePageProps) {
             </div>
           </div>
           <span className="text-xs font-bold bg-white/20 rounded-lg px-3 py-1.5 flex-shrink-0">Hesapla →</span>
+        </Link>
+      )}
+
+      {/* Rehber ↔ Konu merkezi köprüsü: hub'a bağlı rehberlerde çatı linki */}
+      {HUB_FOR_GUIDE[guide.slug] && (
+        <Link
+          href={`/konu/${HUB_FOR_GUIDE[guide.slug].slug}/`}
+          className="flex items-center justify-between gap-4 bg-white dark:bg-slate-800 border-2 border-blue-200 dark:border-blue-900 rounded-2xl px-5 sm:px-6 py-3.5 hover:border-blue-400 transition-colors"
+        >
+          <div className="flex items-center gap-3 min-w-0">
+            <Compass className="w-5 h-5 text-blue-600 flex-shrink-0" />
+            <div className="text-xs font-bold text-slate-700 dark:text-slate-200">
+              Bu rehber <span className="text-blue-700 dark:text-blue-400">{HUB_FOR_GUIDE[guide.slug].name}</span> karar merkezinin parçasıdır — tüm aşamaları tek çatıda gör.
+            </div>
+          </div>
+          <span className="text-[11px] font-bold text-blue-700 dark:text-blue-400 flex-shrink-0">Merkeze git →</span>
         </Link>
       )}
 

@@ -52,6 +52,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.8
     },
+    // Konu merkezleri (decision hubs)
+    {
+      url: `${baseUrl}/konu/ikinci-el-arac/`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9
+    },
     // /arama/ dahili arama sayfası: noindex,follow — sitemap'e girmez.
     {
       url: `${baseUrl}/iletisim/`,
