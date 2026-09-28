@@ -37,6 +37,44 @@ export const DECISION_JOURNEYS: DecisionJourney[] = [
       { guideId: 'klima-alirken', order: 3, note: 'İdeal çalışma ortamı sıcaklığı ve hava kalitesi için inverter klima tercihi yapın.' },
       { guideId: 'mikrofon-alirken', order: 4, note: 'Online toplantılarda net ses iletimi sağlayan USB veya XLR mikrofon seçin.' }
     ]
+  },
+  {
+    id: 'yeni-evimi-kuruyorum',
+    slug: 'yeni-evimi-kuruyorum',
+    title: 'Yeni Evimi Kuruyorum',
+    description: 'Yeni bir eve taşınırken kira, çalışma alanı, iklimlendirme ve temel yaşam kararlarını sırayla değerlendir.',
+    iconName: 'Home',
+    steps: [
+      { guideId: 'ev-kiralarken', order: 1, note: 'Evi ve toplam aylık maliyeti sözleşme öncesinde kontrol et.' },
+      { guideId: 'klima-alirken', order: 2, note: 'Odanın koşullarına ve enerji tüketimine uygun iklimlendirme seç.' },
+      { guideId: 'calisma-masasi-alirken', order: 3, note: 'Çalışma alanının ölçüsünü ve kullanım biçimini belirle.' },
+      { guideId: 'calisma-koltugu-alirken', order: 4, note: 'Uzun süreli kullanım için ergonomi ve ayar seçeneklerini kontrol et.' }
+    ]
+  },
+  {
+    id: 'ev-kiraliyorum',
+    slug: 'ev-kiraliyorum',
+    title: 'Ev Kiralıyorum',
+    description: 'Kiralık ev ararken ilanı, evin fiziksel durumunu, toplam maliyeti ve sözleşme öncesi kontrolleri sırayla değerlendir.',
+    iconName: 'Home',
+    steps: [
+      { guideId: 'ev-kiralarken', order: 1, note: 'İlanı ve konumu yalnızca fotoğraflara göre değil, günlük ihtiyaçlarına göre değerlendir.' },
+      { guideId: 'klima-alirken', order: 2, note: 'Isıtma-soğutma altyapısını ve olası enerji giderlerini ayrıca kontrol et.' },
+      { guideId: 'wifi-router-alirken', order: 3, note: 'Taşınmadan önce internet altyapısı ve bağlantı koşullarını doğrula.' }
+    ]
+  },
+  {
+    id: 'ilk-podcastimi-kuruyorum',
+    slug: 'ilk-podcastimi-kuruyorum',
+    title: 'İlk Podcast Setup’ımı Kuruyorum',
+    description: 'Podcast üretimine başlarken mikrofon, ses kartı, kayıt akışı ve görüntü ekipmanını kullanım amacına göre seç.',
+    iconName: 'Mic',
+    steps: [
+      { guideId: 'mikrofon-alirken', order: 1, note: 'Odanın gürültüsü ve konuşma biçimine göre mikrofon tipini belirle.' },
+      { guideId: 'ses-karti-alirken', order: 2, note: 'Giriş sayısı, bağlantı tipi ve kulaklık izleme ihtiyacını kontrol et.' },
+      { guideId: 'podcast-mikseri-alirken', order: 3, note: 'Birden fazla konuşmacı ve canlı yayın ihtiyacın varsa mikser özelliklerini karşılaştır.' },
+      { guideId: 'kamera-alirken', order: 4, note: 'Video da üreteceksen kamera, ışık ve ses akışını birlikte planla.' }
+    ]
   }
 ];
 
