@@ -49,9 +49,39 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   }
 
   const guides = getGuidesByCategory(category.slug);
+  const baseUrl = 'https://neleredikkat.com';
+  const categoryUrl = `${baseUrl}/${category.slug}/`;
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Ana Sayfa', item: `${baseUrl}/` },
+      { '@type': 'ListItem', position: 2, name: category.name, item: categoryUrl }
+    ]
+  };
+  const collectionJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: `${category.name} Rehberleri ve Kontrol Listeleri`,
+    description: category.description,
+    url: categoryUrl,
+    isPartOf: { '@type': 'WebSite', name: 'NelerDikkat.com', url: `${baseUrl}/` },
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: guides.length,
+      itemListElement: guides.map((guide, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: guide.title,
+        url: `${baseUrl}/${guide.categorySlug}/${guide.slug}/`
+      }))
+    }
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }} />
       
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-xs font-medium text-slate-500">

@@ -17,9 +17,33 @@ export const metadata: Metadata = {
 export default function HomePage() {
   const popularGuides = getPopularGuides(6);
   const latestGuides = getLatestGuides(6);
+  const siteJsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        '@id': 'https://neleredikkat.com/#website',
+        url: 'https://neleredikkat.com/',
+        name: 'NelerDikkat.com',
+        description: 'Karar vermeden önce kontrol listeleri, riskler ve doğru sorular.',
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: 'https://neleredikkat.com/arama/?q={search_term_string}',
+          'query-input': 'required name=search_term_string'
+        }
+      },
+      {
+        '@type': 'Organization',
+        '@id': 'https://neleredikkat.com/#organization',
+        name: 'NelerDikkat.com',
+        url: 'https://neleredikkat.com/'
+      }
+    ]
+  };
 
   return (
     <div className="space-y-16 pb-12">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }} />
       
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-b from-emerald-50/80 via-white to-slate-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900 py-16 sm:py-24 border-b border-slate-200/60 dark:border-slate-800">
