@@ -22,6 +22,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.8
     },
+    {
+      url: `${baseUrl}/araclar/`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7
+    },
+    {
+      url: `${baseUrl}/araclar/klima-btu-hesaplama/`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8
+    },
     // /arama/ dahili arama sayfası: noindex,follow — sitemap'e girmez.
     {
       url: `${baseUrl}/iletisim/`,
