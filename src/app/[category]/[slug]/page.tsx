@@ -11,7 +11,24 @@ import RedFlags from '@/components/RedFlags';
 import SellerQuestions from '@/components/SellerQuestions';
 import GuideCard from '@/components/GuideCard';
 import ScenarioContainer from './ScenarioContainer';
-import { ChevronRight, Clock, CheckSquare, Calendar, ShieldCheck, Compass } from 'lucide-react';
+import { ChevronRight, Clock, CheckSquare, Calendar, ShieldCheck, Compass, Calculator } from 'lucide-react';
+
+/**
+ * Rehber ↔ araç eşlemesi: ilgili rehberin üstünde ölçüm aracını öne çıkarır.
+ * Yeni araç eklendikçe bu harita genişler; Guide veri modeli değişmez.
+ */
+const TOOLS_FOR_GUIDE: Record<string, { href: string; title: string; desc: string }> = {
+  'klima-alirken': {
+    href: '/araclar/klima-btu-hesaplama/',
+    title: 'Klima BTU Hesaplama Aracı',
+    desc: 'Odanın m²sine ve koşullarına göre gereken kapasiteyi 30 saniyede hesapla.'
+  },
+  'ev-kiralarken': {
+    href: '/araclar/ev-kira-maliyeti/',
+    title: 'Ev Kira Maliyeti Hesaplama Aracı',
+    desc: 'Kira + aidat + depozito + komisyon: gerçek aylık maliyeti ve ilk ay çıkışını gör.'
+  }
+};
 
 interface GuidePageProps {
   params: Promise<{
@@ -233,6 +250,23 @@ export default async function GuidePage({ params }: GuidePageProps) {
           </div>
         )}
       </header>
+
+      {/* Rehber ↔ Araç köprüsü: ilgili rehberlerde ölçüm aracını öne çıkar */}
+      {TOOLS_FOR_GUIDE[guide.slug] && (
+        <Link
+          href={TOOLS_FOR_GUIDE[guide.slug].href}
+          className="flex items-center justify-between gap-4 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-2xl px-5 sm:px-6 py-4 hover:from-emerald-700 hover:to-teal-700 transition-colors"
+        >
+          <div className="flex items-center gap-3 min-w-0">
+            <Calculator className="w-6 h-6 flex-shrink-0" />
+            <div className="min-w-0">
+              <div className="text-sm font-extrabold">{TOOLS_FOR_GUIDE[guide.slug].title}</div>
+              <div className="text-xs text-emerald-50/90 truncate">{TOOLS_FOR_GUIDE[guide.slug].desc}</div>
+            </div>
+          </div>
+          <span className="text-xs font-bold bg-white/20 rounded-lg px-3 py-1.5 flex-shrink-0">Hesapla →</span>
+        </Link>
+      )}
 
       {/* Bölüm 1: Kısa Cevap / Giriş Özet */}
       <section className="bg-white dark:bg-slate-800/80 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 p-6 sm:p-8 space-y-4">

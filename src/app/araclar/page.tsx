@@ -19,6 +19,11 @@ const TOOLS = [
     href: '/araclar/klima-btu-hesaplama/',
     title: 'Klima BTU Hesaplama',
     description: 'Odanın m²si, tavan yüksekliği, güneş durumu, izolasyon ve katına göre gereken klima kapasitesini hesapla; uygun standart bandı gör.'
+  },
+  {
+    href: '/araclar/ev-kira-maliyeti/',
+    title: 'Ev Kira Maliyeti Hesaplama',
+    description: 'Kira + aidat + depozito + emlakçı komisyonunu birlikte hesapla; ilk ay toplam çıkışı ve gelirine göre bütçe bandını gör.'
   }
 ];
 
