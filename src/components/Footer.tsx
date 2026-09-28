@@ -90,6 +90,11 @@ export default function Footer() {
                   info@neleredikkat.com
                 </a>
               </p>
+              <div className="pt-1 space-y-1.5">
+                <Link href="/hakkimizda/" className="block text-[11px] text-slate-400 hover:text-emerald-400 transition-colors">Hakkımızda</Link>
+                <Link href="/metodoloji/" className="block text-[11px] text-slate-400 hover:text-emerald-400 transition-colors">Metodoloji — Rehberler Nasıl Yazılır?</Link>
+                <Link href="/editorial-ekip/" className="block text-[11px] text-slate-400 hover:text-emerald-400 transition-colors">Editoryal Ekip ve Uzmanlık Alanları</Link>
+              </div>
             </div>
           </div>
 

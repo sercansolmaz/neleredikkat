@@ -260,6 +260,25 @@ export default async function GuidePage({ params }: GuidePageProps) {
           {guide.title}
         </h1>
 
+        {/* Güven bandı (E-E-A-T): gözden geçiren + uzmanlık kaynağı */}
+        {(guide.reviewedBy || guide.expertiseArea) && (
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-900/40 border border-slate-100 dark:border-slate-800 rounded-xl px-3.5 py-2">
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
+            {guide.reviewedBy && (
+              <span>
+                Gözden geçiren: <strong className="text-slate-700 dark:text-slate-200">{guide.reviewedBy}</strong>
+                {guide.reviewedAt ? ` (${guide.reviewedAt})` : ''}
+              </span>
+            )}
+            {guide.expertiseArea && (
+              <span className="text-slate-400">· Kaynak: {guide.expertiseArea}</span>
+            )}
+            <Link href="/metodoloji/" className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline ml-auto">
+              Metodoloji →
+            </Link>
+          </div>
+        )}
+
         {/* Decision Journey Context Alert if present */}
         {journey && (
           <div className="bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 p-3.5 rounded-2xl flex items-center justify-between text-xs gap-3">

@@ -717,6 +717,9 @@ export const GUIDES: Guide[] = [
     estimatedReadTimeMinutes: 4,
     lastUpdated: '2026-09-14',
     status: 'published',
+    reviewedBy: 'Sercan Solmaz',
+    reviewedAt: '2026-09-28',
+    expertiseArea: 'Ses kayıt teknolojileri — 20 yıl saha deneyimi',
     importanceItems: [
       { id: 'type', title: '1. Kapsül Tipi (Dinamik vs. Kondenser)', description: 'Yankılı/gürültülü odalar için Dinamik; akustiği düzenlenmiş stüdyolar için Kondenser mikrofon seçilmelidir.', importance: 'critical' },
       { id: 'connection', title: '2. Bağlantı Türü (USB vs. XLR)', description: 'Tak-çalıştır pratiklik için USB; ses kartı ile profesyonel kontrol için XLR bağlantı tercih edilir.', importance: 'critical' },
@@ -754,6 +757,9 @@ export const GUIDES: Guide[] = [
     estimatedReadTimeMinutes: 4,
     lastUpdated: '2026-09-14',
     status: 'published',
+    reviewedBy: 'Sercan Solmaz',
+    reviewedAt: '2026-09-28',
+    expertiseArea: 'Ses kayıt teknolojileri — 20 yıl saha deneyimi',
     importanceItems: [
       { id: 'preamp', title: '1. Preamp Kalitesi ve Düşük Dip Gürültüsü (EIN)', description: 'Mikrofon sinyalini yükseltirken tıslama yapmayan temiz preamp katı kritik önem taşır.', importance: 'critical' },
       { id: 'phantom', title: '2. +48V Phantom Power Desteği', description: 'Kondenser mikrofonları beslemek için bağımsız +48V güç anahtarı bulunmalıdır.', importance: 'critical' },
@@ -1256,6 +1262,9 @@ export const GUIDES: Guide[] = [
     estimatedReadTimeMinutes: 5,
     lastUpdated: '2026-09-15',
     status: 'published',
+    reviewedBy: 'Sercan Solmaz',
+    reviewedAt: '2026-09-28',
+    expertiseArea: 'Ses kayıt teknolojileri — 20 yıl saha deneyimi',
     importanceItems: [
       { id: 'tur', title: 'Kulaklık Türü ve Kullanım Senaryosu', description: 'Kulakiçi (TWS) taşınabilirlik, over-ear konfor ve sahne hissi, oyun için mikrofonlu kablolu modeller öne çıkar. İlk karar verilecek şey budur.', importance: 'critical' },
       { id: 'surucu', title: 'Sürücü ve Frekans Dengesi', description: '40mm+ dinamik sürücüler over-ear’larda standarttır; frekans grafiği V-shaped (bas öne çıkan) ile nötr (flat) arasında seçim, müzik zevkinize ve kullanım amacınıza bağlıdır.', importance: 'critical' },
@@ -1309,6 +1318,9 @@ export const GUIDES: Guide[] = [
     estimatedReadTimeMinutes: 4,
     lastUpdated: '2026-09-15',
     status: 'published',
+    reviewedBy: 'Sercan Solmaz',
+    reviewedAt: '2026-09-28',
+    expertiseArea: 'Ses kayıt teknolojileri — 20 yıl saha deneyimi',
     importanceItems: [
       { id: 'band', title: 'Frekans Bandı (2.4GHz / UHF / Bluetooth)', description: '2.4GHz dijital sistemler pratik ve lisanssızdır ama kalabalık Wi-Fi ortamlarında girişime açıktır; UHF sistemler daha güvenilir menzil sunar. Bluetooth modeller gecikme nedeniyle yayına değil, konuşmaya uygundur.', importance: 'critical' },
       { id: 'menzil', title: 'Gerçek Menzil ve Kesintisiz Bağlantı', description: 'Kutuda yazan 200m menzil açık alan değeridir; duvarlı iç mekanlarda menzil ciddi düşer. İç mekan kullanımı için girişim direnci daha önemlidir.', importance: 'critical' },
@@ -1361,6 +1373,9 @@ export const GUIDES: Guide[] = [
     estimatedReadTimeMinutes: 4,
     lastUpdated: '2026-09-15',
     status: 'published',
+    reviewedBy: 'Sercan Solmaz',
+    reviewedAt: '2026-09-28',
+    expertiseArea: 'Ses kayıt teknolojileri — 20 yıl saha deneyimi',
     importanceItems: [
       { id: 'kanal', title: 'Kanal Sayısı ve Mikrofon Kapasitesi', description: 'Kaç kişi kaydedecekseniz o kadar XLR girişli (her biri +48V fantom beslemeli) kanal gerekir; 2 kişi için 2-3 kanal, 4 kişi için 4+ kanal modeller araştırılmalıdır.', importance: 'critical' },
       { id: 'arabirim', title: 'USB Arabirimi ve Sürücü Desteği', description: 'Bilgisayara USB-C ile bağlanan modeller hem kayıt hem izleme (headphone out) sağlar; düşük gecikmeli sürükleme (loopback) desteği canlı yayın için kritik özelliktir.', importance: 'critical' },
@@ -1413,6 +1428,9 @@ export const GUIDES: Guide[] = [
     estimatedReadTimeMinutes: 4,
     lastUpdated: '2026-09-15',
     status: 'published',
+    reviewedBy: 'Sercan Solmaz',
+    reviewedAt: '2026-09-28',
+    expertiseArea: 'Ses kayıt teknolojileri — 20 yıl saha deneyimi',
     importanceItems: [
       { id: 'tussayisi', title: 'Tuş Sayısı (25 / 49 / 61 / 88)', description: 'Beat ve bas üretimi için 25-49 tuş yeterliyken; piyano eserleri ve iki el çalış için 61-88 tuş gerekir. Kompaktlık ihtiyacıyla tuş sayısı arasında denge kurulmalıdır.', importance: 'critical' },
       { id: 'aksiyon', title: 'Tuş Aksiyonu (Synth / Semi-Weighted / Hammer)', description: 'Synth aksiyon hafif ve hızlıdır; semi-weighted orta yol; hammer action (çekiçli) akustik piyano hissini en iyi veren seçenektir. Piyano geçiş yapacaklar hammer action aramalıdır.', importance: 'critical' },
@@ -1465,6 +1483,9 @@ export const GUIDES: Guide[] = [
     estimatedReadTimeMinutes: 6,
     lastUpdated: '2026-09-15',
     status: 'published',
+    reviewedBy: 'Sercan Solmaz',
+    reviewedAt: '2026-09-28',
+    expertiseArea: 'Ses kayıt teknolojileri — 20 yıl saha deneyimi',
     importanceItems: [
       { id: 'sensor', title: 'Sensör Boyutu (Micro 4/3 / APS-C / Full-Frame)', description: 'Sensör büyüdükçe düşük ışık performansı, dinamik aralık ve bokeh (arka plan bulanıklığı) iyileşir; APS-C fiyat Performans dengesinde tatlı noktadır.', importance: 'critical' },
       { id: 'video-kayit', title: 'Video Kayıt Yetenekleri (4K60 / 10-bit / Log)', description: 'İçerik üreticileri için 4K 60fps, 10-bit renk derinliği ve Log profil desteği kurgu esnekliği sağlar; ısı nedeniyle kayıt süresi limitleri kontrol edilmelidir.', importance: 'critical' },
@@ -1519,6 +1540,9 @@ export const GUIDES: Guide[] = [
     estimatedReadTimeMinutes: 4,
     lastUpdated: '2026-09-15',
     status: 'published',
+    reviewedBy: 'Sercan Solmaz',
+    reviewedAt: '2026-09-28',
+    expertiseArea: 'Ses kayıt teknolojileri — 20 yıl saha deneyimi',
     importanceItems: [
       { id: 'kapasite', title: 'Taşıma Kapasitesi', description: 'Tripodun toplam taşıma kapasitesi, kamera + en ağır lens + flaş kurulumunuzun en az 1.5 katı olmalıdır; sınırda çalışan tripodlar titreşir ve devrilir.', importance: 'critical' },
       { id: 'malzeme', title: 'Malzeme (Alüminyum / Karbon Fiber)', description: 'Karbon fiber hafif ve titreşim absorbe edicidir (uzun pozlama avantajı) ama pahalıdır; alüminyum ağır ama ekonomik ve dayanıklıdır. Doğa/fotoğrafçılık için karbon, stüdyo için alüminyum mantıklıdır.', importance: 'critical' },
@@ -1572,6 +1596,9 @@ export const GUIDES: Guide[] = [
     estimatedReadTimeMinutes: 4,
     lastUpdated: '2026-09-15',
     status: 'published',
+    reviewedBy: 'Sercan Solmaz',
+    reviewedAt: '2026-09-28',
+    expertiseArea: 'Ses kayıt teknolojileri — 20 yıl saha deneyimi',
     importanceItems: [
       { id: 'parlaklik', title: 'Parlaklık (Lümen) ve Güç', description: '1 metreden 2000+ lümen değerleri portre çekimi için yeterli başlangıçtır; büyük sahne için 5000+ lümen gerekir. Watt değil lümen ve lux değeri kıyaslanmalıdır.', importance: 'critical' },
       { id: 'renk-dogrulugu', title: 'Renk Doğruluğu (CRI 95+ / TLCI)', description: 'CRI 95 ve TLCI 90 altındaki ışıklar ten tonunu ve ürün renklerini bozar; kurguda düzeltilmesi zordur. Spec sayfasında CRI değerini mutlaka arayın.', importance: 'critical' },
@@ -1624,6 +1651,9 @@ export const GUIDES: Guide[] = [
     estimatedReadTimeMinutes: 3,
     lastUpdated: '2026-09-15',
     status: 'published',
+    reviewedBy: 'Sercan Solmaz',
+    reviewedAt: '2026-09-28',
+    expertiseArea: 'Ses kayıt teknolojileri — 20 yıl saha deneyimi',
     importanceItems: [
       { id: 'cam', title: 'Beam-Splitter Cam Kalitesi', description: '70/30 oranlı beam-splitter cam metni net yansıtır ve kameraya geçen ışığı minimum kayıplı aktarır; düz cam veya ayna kullanılan modellerde görüntü kararır.', importance: 'critical' },
       { id: 'yuva', title: 'Telefon/Tablet Yuvası Uyumu', description: 'Kullanacağınız cihazın (telefon, 11" tablet) yuvaya sığıp sığmadığı ve kilitleme mekanizması kontrol edilmelidir; genişleyen yuvalar esneklik sağlar.', importance: 'critical' },

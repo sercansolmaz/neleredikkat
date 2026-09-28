@@ -77,6 +77,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.9
     },
+    // Güven katmanı (E-E-A-T)
+    {
+      url: `${baseUrl}/hakkimizda/`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.5
+    },
+    {
+      url: `${baseUrl}/metodoloji/`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.5
+    },
+    {
+      url: `${baseUrl}/editorial-ekip/`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.5
+    },
     // /arama/ dahili arama sayfası: noindex,follow — sitemap'e girmez.
     {
       url: `${baseUrl}/iletisim/`,

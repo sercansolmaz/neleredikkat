@@ -48,6 +48,9 @@ export interface Guide {
   estimatedReadTimeMinutes: number;
   lastUpdated: string;
   status: 'published' | 'draft';
+  reviewedBy?: string;        // görünen isim (E-E-A-T): "Sercan Solmaz"
+  reviewedAt?: string;        // ISO tarih — lastUpdated'ten ayrı: içerik mi gözden geçirme mi
+  expertiseArea?: string;     // güvenin kaynağı: "Ses kayıt teknolojileri, 20 yıl" | "Mevzuat ve sektör pratiği"
 
   importanceItems: ImportanceItem[];
   checklistItems: ChecklistItem[];
