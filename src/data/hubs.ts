@@ -193,6 +193,31 @@ export const DECISION_HUBS: DecisionHub[] = [
         a: 'Montaj; iç-dış ünite mesafesi, boru izolasyonu ve eğim doğruluğu cihazın gerçek kapasitesini belirler. Yanlış montaj, verimli cihazı düşük verimle çalıştırır ve garanti kapsamını da riske atabilir. Ücretsiz keşif yapan yetkili servis tercih edilmelidir.'
       }
     ]
+  },
+  {
+    slug: 'podcast-kurulumu',
+    title: 'Podcast Kurulum Merkezi',
+    h1: 'Podcast Setup Kurarken Karar Merkezi — Ses ve Görüntü Tüm Adımlar',
+    description: 'Podcast kurarken mikrofon tipinden ses kartına, görüntü ekipmanına kadar tüm karar adımları, seçim araçları ve kontrol listeleri tek merkezde.',
+    intro: [
+      'Podcast kurulumunda en pahalı hata ekipmanı yanlış SIRADA almaktır: oda koşulu belirlenmeden alınan mikrofon, kayıt akışı kurulmadan alınan mikser, para kaybının en yaygın iki şekli. Bu merkez kurulumu dört aşamaya böler.',
+      'Sıra önemlidir: önce oda ve mikrofon tipi kararı, sonra arayüz, sonra ancak görüntü. Her aşamanın kendi kontrol listesi ve kaçınma notları vardır — bir sonraki aşamaya geçmeden önceki aşamanın kararı netleşir.'
+    ],
+    iconName: 'Mic',
+    stages: [
+      { key: 'oda-mikrofon', label: '1. Oda ve Mikrofon Tipi Kararı', desc: 'Kayıt yapacağın odanın koşulu mikrofon tipini (dinamik/kondenser, USB/XLR) belirler.', guideIds: [] },
+      { key: 'ses-zinciri', label: '2. Ses Zinciri', desc: 'Mikrofondan sonra: arayüz/ses kartı, kulaklık ve çok konuşmacı gereksinimleri.', guideIds: ['mikrofon-alirken', 'ses-karti-alirken', 'kulaklik-alirken', 'kablosuz-mikrofon-alirken', 'podcast-mikseri-alirken'] },
+      { key: 'goruntu', label: '3. Görüntü ve Video', desc: 'Video podcast geçişi: kamera, lens, tripod, ışık ve teleprompter kararları.', guideIds: ['kamera-alirken', 'kamera-lensi-alirken', 'tripod-alirken', 'video-isigi-alirken', 'teleprompter-alirken'] },
+      { key: 'monitors', label: '4. İzleme ve Üretim', desc: 'Kayıt sonrası düzenleme ve müzik üretimi uzantıları.', guideIds: ['studyo-monitoru-alirken', 'midi-klavye-alirken'] }
+    ],
+    tools: [
+      { href: '/araclar/podcast-mikrofonu-secici/', title: 'Podcast Mikrofonu Seçici', desc: 'Odan ve kullanımına göre USB/XLR ve dinamik/kondenser yönünü 4 soruda belirle.' }
+    ],
+    faq: [
+      { q: 'Podcaste başlarken önce ne alınmalı?', a: 'Önce oda kararı, sonra mikrofon. Oda koşulu (gürültü, yankı) mikrofon tipini belirler; mikrofon tipi de arayüz ihtiyacını. Sırayı bozarak alınan ekipman, odaya uymayan ekipmandır.' },
+      { q: 'USB mikrofon yeterli mi yoksa XLR mi almalıyım?', a: 'Tek kişi + basit kurulum için USB yeterlidir. İleride ikinci mikrofon, mikser veya daha kaliteli ön amplifikatör planın varsa XLR + ses kartı baştan daha mantıklıdır; geçiş maliyeti daha yüksek olur.' },
+      { q: 'Podcast için kamera şart mı?', a: 'Değildir — birçok başarılı podcast yalnızca seslidir. Video; dağıtım kanalını (YouTube vb.) genişletir ama ses kalitesini asla telafi etmez. Karar sırasında ses zinciri her zaman önceliklidir.' }
+    ]
   }
 ];
 
